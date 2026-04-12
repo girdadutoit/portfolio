@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Girda du Toit | UX Design Director Portfolio</title>
+
+    <!-- SEO & Open Graph -->
+    <meta name="description" content="Girda du Toit — UX Design Director. Translating complex digital puzzles into intuitive experiences through strategic leadership and an AI-augmented workflow.">
+    <meta property="og:title" content="Girda du Toit | UX Design Director Portfolio">
+    <meta property="og:description" content="Strategic UX leadership and AI-augmented design workflow. Available for UX Design Director roles.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Girda du Toit | UX Design Director">
+    <meta name="theme-color" content="#4f46e5">
+
+    <!-- Favicon (inline SVG data URI) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='16' fill='%234f46e5'/><circle cx='16' cy='16' r='6' fill='white'/></svg>">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Google Fonts: Maven Pro (Headings) & Inter (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Maven+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* Typography overrides */
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, .font-maven { font-family: 'Maven Pro', sans-serif; }
+
+        /* CRITICAL: Chart Container Styling */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 40vh;
+            min-height: 300px;
+            max-height: 450px;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f8fafc; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* Design Canvas Dot Grid Pattern */
+        .bg-grid-pattern {
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* Animations */
+        .fade-in { animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Glassmorphism utility */
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* Mobile menu animation */
+        #mobile-menu {
+            transition: max-height 0.35s ease, opacity 0.3s ease;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+        }
+        #mobile-menu.open {
+            max-height: 400px;
+            opacity: 1;
+        }
+
+        /* Avatar gradient ring */
+        .avatar-ring {
+            background: linear-gradient(135deg, #4f46e5, #8b5cf6, #ec4899);
+            padding: 3px;
+            border-radius: 9999px;
+            display: inline-block;
+        }
+
+        /* Timeline connector */
+        .timeline-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 19px;
+            top: 44px;
+            bottom: -24px;
+            width: 2px;
+            background: linear-gradient(to bottom, #e2e8f0, transparent);
+        }
+
+        /* Focus styles for accessibility */
+        :focus-visible {
+            outline: 2px solid #4f46e5;
+            outline-offset: 3px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased leading-relaxed overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 glass border-b border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="#hero" class="text-2xl font-black tracking-tight text-slate-900 flex items-center gap-1.5 font-maven focus-visible:outline-indigo-600">
+                    <div class="w-2.5 h-2.5 rounded-full bg-indigo-600"></div> GDT
+                </a>
+                <!-- Desktop nav -->
+                <div class="hidden md:flex space-x-8 text-sm font-semibold text-slate-600">
+                    <a href="#about" class="hover:text-indigo-600 transition-colors">About</a>
+                    <a href="#process" class="hover:text-indigo-600 transition-colors">AI Workflow</a>
+                    <a href="#impact" class="hover:text-indigo-600 transition-colors">Impact Metrics</a>
+                    <a href="#projects" class="hover:text-indigo-600 transition-colors">Case Studies</a>
+                    <a href="#skills" class="hover:text-indigo-600 transition-colors">Expertise</a>
+                </div>
+                <div class="flex items-center gap-3">
+                    <!-- LinkedIn -->
+                    <a href="https://www.linkedin.com/in/girda-du-toit" target="_blank" rel="noopener" aria-label="LinkedIn Profile" class="hidden md:flex w-9 h-9 items-center justify-center rounded-full border border-slate-200 text-slate-500 hover:text-indigo-600 hover:border-indigo-300 transition-all duration-200">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                    <a href="mailto:girdadutoit@gmail.com" class="px-6 py-2.5 bg-slate-900 text-white rounded-full text-sm font-bold tracking-wide shadow-md shadow-slate-900/20 hover:bg-indigo-600 hover:shadow-lg hover:shadow-indigo-500/30 hover:-translate-y-0.5 transition-all duration-300 inline-block border border-transparent font-maven">Let's Talk</a>
+                    <!-- Mobile hamburger -->
+                    <button id="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden flex flex-col justify-center items-center w-9 h-9 gap-1.5 rounded-lg hover:bg-slate-100 transition-colors">
+                        <span class="hamburger-bar block w-5 h-0.5 bg-slate-700 transition-all duration-300 origin-center"></span>
+                        <span class="hamburger-bar block w-5 h-0.5 bg-slate-700 transition-all duration-300 origin-center"></span>
+                        <span class="hamburger-bar block w-5 h-0.5 bg-slate-700 transition-all duration-300 origin-center"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu drawer -->
+        <div id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+            <div class="max-w-7xl mx-auto px-4 pb-4 flex flex-col space-y-1">
+                <a href="#about" class="mobile-nav-link px-4 py-3 rounded-xl text-slate-700 font-semibold hover:bg-indigo-50 hover:text-indigo-700 transition-colors">About</a>
+                <a href="#process" class="mobile-nav-link px-4 py-3 rounded-xl text-slate-700 font-semibold hover:bg-indigo-50 hover:text-indigo-700 transition-colors">AI Workflow</a>
+                <a href="#impact" class="mobile-nav-link px-4 py-3 rounded-xl text-slate-700 font-semibold hover:bg-indigo-50 hover:text-indigo-700 transition-colors">Impact Metrics</a>
+                <a href="#projects" class="mobile-nav-link px-4 py-3 rounded-xl text-slate-700 font-semibold hover:bg-indigo-50 hover:text-indigo-700 transition-colors">Case Studies</a>
+                <a href="#skills" class="mobile-nav-link px-4 py-3 rounded-xl text-slate-700 font-semibold hover:bg-indigo-50 hover:text-indigo-700 transition-colors">Expertise</a>
+                <div class="pt-2 border-t border-slate-100 flex gap-3">
+                    <a href="mailto:girdadutoit@gmail.com" class="flex-1 text-center px-4 py-3 bg-slate-900 text-white rounded-xl text-sm font-bold font-maven">Let's Talk</a>
+                    <a href="https://www.linkedin.com/in/girda-du-toit" target="_blank" class="px-4 py-3 border border-slate-200 rounded-xl text-slate-600 text-sm font-semibold hover:border-indigo-300 hover:text-indigo-600 transition-colors">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Background Decoration -->
+    <div class="absolute top-0 inset-x-0 h-[500px] bg-grid-pattern opacity-40 pointer-events-none -z-10 [mask-image:linear-gradient(to_bottom,white,transparent)]"></div>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-32">
+
+        <!-- Hero Section -->
+        <section id="hero" class="text-center max-w-4xl mx-auto pt-10">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 font-bold tracking-widest text-[11px] uppercase mb-8 shadow-sm font-maven">
+                <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-600"></span></span>
+                UX Design Director &bull; Available for New Roles
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black tracking-tight mb-6 text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-indigo-900 to-violet-600 pb-2">
+                Girda du Toit
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-600 mb-12 font-light leading-relaxed max-w-3xl mx-auto">
+                Translating complex digital puzzles into intuitive experiences through <span class="font-semibold text-slate-900">strategic leadership</span> and an <span class="font-semibold text-slate-900">AI-augmented workflow</span>.
+            </p>
+            <div class="bg-white p-8 rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-100 text-left relative overflow-hidden transform hover:-translate-y-1 transition-transform duration-500">
+                <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500"></div>
+                <p class="text-slate-600 text-sm md:text-base leading-relaxed">
+                    <strong class="text-slate-900 font-bold tracking-wide uppercase text-xs mb-2 block font-maven">Context of this Portfolio</strong> 
+                    Welcome to my interactive portfolio. This application showcases not just my final design outputs, but the strategic, highly efficient information architecture and AI-driven methodologies I employ to lead digital transformations. My goal is to demonstrate how I significantly shorten project timelines and create headspace for high-level creative strategy — directly delivering measurable business value.
+                </p>
+            </div>
+        </section>
+
+        <!-- About / Experience Section -->
+        <section id="about" class="scroll-mt-32">
+            <div class="mb-12 text-center max-w-3xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">About & Experience</h2>
+                <p class="text-slate-500 text-lg">A decade of turning complex problems into elegant digital experiences, leading teams and clients from strategy through to launch.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+                <!-- Bio card -->
+                <div class="lg:col-span-2 bg-white rounded-3xl p-8 border border-slate-200 shadow-sm space-y-6">
+                    <div>
+                        <h3 class="text-lg font-extrabold text-slate-900 mb-3 font-maven">Profile</h3>
+                        <p class="text-slate-600 leading-relaxed text-sm">Senior UX Designer and aspiring Design Director with 8+ years of experience across consulting, healthcare, education, and campaign sectors. Based in London, UK, with a proven track record of leading end-to-end digital transformations for high-profile clients.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold text-slate-900 uppercase tracking-widest mb-3 font-maven">Core Tools</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-indigo-50 text-indigo-700 rounded-full text-xs font-bold font-maven border border-indigo-100">Figma</span>
+                            <span class="px-3 py-1 bg-violet-50 text-violet-700 rounded-full text-xs font-bold font-maven border border-violet-100">Relume.io</span>
+                            <span class="px-3 py-1 bg-fuchsia-50 text-fuchsia-700 rounded-full text-xs font-bold font-maven border border-fuchsia-100">Claude AI</span>
+                            <span class="px-3 py-1 bg-rose-50 text-rose-700 rounded-full text-xs font-bold font-maven border border-rose-100">Notebook LM</span>
+                            <span class="px-3 py-1 bg-amber-50 text-amber-700 rounded-full text-xs font-bold font-maven border border-amber-100">Design.md</span>
+                            <span class="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-xs font-bold font-maven border border-slate-200">Figma Make</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold text-slate-900 uppercase tracking-widest mb-3 font-maven">Location</h3>
+                        <p class="text-slate-600 text-sm flex items-center gap-2">
+                            <svg class="w-4 h-4 text-indigo-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            London, UK &mdash; Open to remote & hybrid roles
+                        </p>
+                    </div>
+                    <a href="mailto:girdadutoit@gmail.com" class="w-full flex items-center justify-center gap-2 px-5 py-3 bg-indigo-600 text-white rounded-xl text-sm font-bold font-maven hover:bg-indigo-700 transition-colors shadow-md shadow-indigo-500/20">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        Get in Touch
+                    </a>
+                </div>
+
+                <!-- Timeline -->
+                <div class="lg:col-span-3 bg-white rounded-3xl p-8 border border-slate-200 shadow-sm">
+                    <h3 class="text-lg font-extrabold text-slate-900 mb-8 font-maven">Career Timeline</h3>
+                    <div class="space-y-6">
+
+                        <div class="timeline-item relative flex gap-4">
+                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center shadow-md shadow-indigo-500/30 z-10">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            </div>
+                            <div class="flex-1 pb-6">
+                                <div class="flex items-start justify-between flex-wrap gap-2 mb-1">
+                                    <h4 class="font-extrabold text-slate-900 font-maven">Senior UX Designer</h4>
+                                    <span class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-full border border-indigo-100 font-maven">2022 – Present</span>
+                                </div>
+                                <p class="text-sm font-semibold text-slate-500 mb-2">FINN Partners &mdash; London, UK</p>
+                                <p class="text-sm text-slate-600 leading-relaxed">Leading end-to-end UX strategy and design for clients across consulting, healthcare, BioPharma, and campaign sectors. Pioneered AI-integrated workflow reducing project delivery time by 40–60%.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item relative flex gap-4">
+                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-violet-500 flex items-center justify-center shadow-md shadow-violet-500/30 z-10">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                            </div>
+                            <div class="flex-1 pb-6">
+                                <div class="flex items-start justify-between flex-wrap gap-2 mb-1">
+                                    <h4 class="font-extrabold text-slate-900 font-maven">UX Designer</h4>
+                                    <span class="text-xs font-bold text-violet-600 bg-violet-50 px-2.5 py-1 rounded-full border border-violet-100 font-maven">2019 – 2022</span>
+                                </div>
+                                <p class="text-sm font-semibold text-slate-500 mb-2">FINN Partners &mdash; London, UK</p>
+                                <p class="text-sm text-slate-600 leading-relaxed">Delivered UX strategy and design systems for client accounts across diverse sectors. Led cross-functional workshops and stakeholder presentations, built and maintained a shared Figma component library used across the agency.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item relative flex gap-4">
+                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-rose-500 flex items-center justify-center shadow-md shadow-rose-500/30 z-10">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                            </div>
+                            <div class="flex-1 pb-6">
+                                <div class="flex items-start justify-between flex-wrap gap-2 mb-1">
+                                    <h4 class="font-extrabold text-slate-900 font-maven">Digital Designer</h4>
+                                    <span class="text-xs font-bold text-rose-600 bg-rose-50 px-2.5 py-1 rounded-full border border-rose-100 font-maven">2017 – 2019</span>
+                                </div>
+                                <p class="text-sm font-semibold text-slate-500 mb-2">Independent Practice &mdash; Cape Town, South Africa</p>
+                                <p class="text-sm text-slate-600 leading-relaxed">Delivered end-to-end digital and visual design across a portfolio of client projects spanning web design, brand identity, and graphic design. Developed a strong commercial foundation in translating client briefs into polished, purposeful digital experiences.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item relative flex gap-4">
+                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-fuchsia-500 flex items-center justify-center shadow-md shadow-fuchsia-500/30 z-10">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-start justify-between flex-wrap gap-2 mb-1">
+                                    <h4 class="font-extrabold text-slate-900 font-maven">BA Interaction Design</h4>
+                                    <span class="text-xs font-bold text-fuchsia-600 bg-fuchsia-50 px-2.5 py-1 rounded-full border border-fuchsia-100 font-maven">2015 – 2017</span>
+                                </div>
+                                <p class="text-sm font-semibold text-slate-500">Cape Town Creative Academy &mdash; Cape Town, South Africa</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Workflow Section -->
+        <section id="process" class="scroll-mt-32">
+            <div class="mb-12 text-center max-w-3xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">The AI-Augmented Workflow</h2>
+                <p class="text-slate-500 text-lg">
+                    Understanding the process is as critical as the final product for a design leader. This interactive component details how I systematically integrate AI tools from discovery to handoff.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-3xl shadow-xl shadow-slate-200/40 border border-slate-200 overflow-hidden flex flex-col md:flex-row min-h-[450px]">
+                <div class="w-full md:w-1/3 bg-slate-50/50 border-r border-slate-200 p-6 flex flex-col justify-center space-y-3" id="workflow-nav"></div>
+                <div class="w-full md:w-2/3 p-8 lg:p-14 flex flex-col justify-center bg-white" id="workflow-content"></div>
+            </div>
+        </section>
+
+        <!-- Efficiency Impact (Data Viz) Section -->
+        <section id="impact" class="scroll-mt-32">
+            <div class="mb-12 max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">Quantifying the Impact</h2>
+                <p class="text-slate-500 text-lg">
+                    Strategic leadership requires measurable results. This chart visualises the tangible business value of my AI-integrated workflow, directly resulting in faster time-to-market.
+                </p>
+            </div>
+
+            <div class="bg-white p-6 md:p-10 rounded-3xl shadow-xl shadow-slate-200/40 border border-slate-200">
+                <h3 class="text-xl font-bold text-slate-900 mb-2 text-center">Time Expenditure: Traditional vs. AI-Augmented Process</h3>
+                <p class="text-sm text-slate-500 text-center mb-8 font-medium">Values represent relative time units per project phase (indexed to 100 = traditional baseline).</p>
+                
+                <div class="chart-container">
+                    <canvas id="efficiencyChart"></canvas>
+                </div>
+                
+                <div class="mt-8 text-center text-sm text-slate-600 max-w-2xl mx-auto bg-slate-50 p-4 rounded-xl border border-slate-100">
+                    <strong class="text-indigo-700 font-maven tracking-wide">KEY TAKEAWAY:</strong> By utilising custom AI agents for auditing and tools like Relume and Figma Make, structural phases (Wireframing/Components) see a <strong class="text-slate-900 font-bold">time reduction of over 50%</strong>.
+                </div>
+                <p class="text-center text-xs text-slate-400 mt-3">* Estimates based on tracked project hours across client engagements 2022–2026. Individual results vary by project scope.</p>
+            </div>
+        </section>
+
+        <!-- Project Portfolio Section -->
+        <section id="projects" class="scroll-mt-32">
+            <div class="mb-12 max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">Strategic Case Studies</h2>
+                <p class="text-slate-500 text-lg">
+                    Theory meets execution. Explore a curated selection of recent projects across diverse sectors, highlighting strategic goals and ultimate client impact.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="project-grid"></div>
+        </section>
+
+        <!-- Skills & Expertise Section -->
+        <section id="skills" class="scroll-mt-32 mb-24">
+            <div class="mb-12 max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">Leadership Competencies</h2>
+                <p class="text-slate-500 text-lg">
+                    A UX Director requires a balanced, cross-functional skill set — spanning research, strategy, AI integration, and flawless execution.
+                </p>
+            </div>
+
+            <div class="bg-white p-6 md:p-10 rounded-3xl shadow-xl shadow-slate-200/40 border border-slate-200">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="relative pl-6 border-l-2 border-indigo-500">
+                        <div class="absolute w-3 h-3 bg-indigo-500 rounded-full -left-[7px] top-1.5 ring-4 ring-white"></div>
+                        <h4 class="font-bold text-slate-900 text-lg mb-2">AI Integration & Optimisation</h4>
+                        <p class="text-slate-600 leading-relaxed">Custom agent training, prompt engineering, and utilising Claude, Relume, Notebook LM, and ChatGPT for rapid scaling and team alignment.</p>
+                    </div>
+                    <div class="relative pl-6 border-l-2 border-violet-500">
+                        <div class="absolute w-3 h-3 bg-violet-500 rounded-full -left-[7px] top-1.5 ring-4 ring-white"></div>
+                        <h4 class="font-bold text-slate-900 text-lg mb-2">UX Strategy & Leadership</h4>
+                        <p class="text-slate-600 leading-relaxed">Cross-functional collaboration, leading client workshops, presentation design (Figma Make), and overarching digital strategy.</p>
+                    </div>
+                    <div class="relative pl-6 border-l-2 border-fuchsia-500">
+                        <div class="absolute w-3 h-3 bg-fuchsia-500 rounded-full -left-[7px] top-1.5 ring-4 ring-white"></div>
+                        <h4 class="font-bold text-slate-900 text-lg mb-2">Systems & Execution</h4>
+                        <p class="text-slate-600 leading-relaxed">Building scalable design frameworks in Figma, rigorous QA, and standardised Developer Handoff workflows (Design.md).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="scroll-mt-32 mb-24">
+            <div class="bg-gradient-to-br from-slate-900 via-indigo-950 to-violet-950 rounded-3xl p-12 md:p-16 text-center relative overflow-hidden">
+                <div class="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
+                <div class="relative z-10">
+                    <p class="text-indigo-300 font-bold font-maven tracking-widest text-xs uppercase mb-4">Let's Work Together</p>
+                    <h2 class="text-3xl md:text-5xl font-black text-white mb-6 tracking-tight">Ready to elevate<br class="hidden md:block"> your digital experience?</h2>
+                    <p class="text-slate-300 text-lg mb-10 max-w-2xl mx-auto leading-relaxed">I'm currently available for UX Design Director roles and senior freelance engagements. Let's discuss how strategic UX leadership can drive your product forward.</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="mailto:girdadutoit@gmail.com" class="px-8 py-4 bg-white text-slate-900 rounded-full text-base font-bold font-maven hover:bg-indigo-50 transition-colors shadow-xl shadow-black/20 hover:-translate-y-0.5 transition-transform duration-200">
+                            Send an Email
+                        </a>
+                        <a href="https://www.linkedin.com/in/girda-du-toit" target="_blank" rel="noopener" class="px-8 py-4 bg-white/10 text-white border border-white/20 rounded-full text-base font-bold font-maven hover:bg-white/20 transition-colors backdrop-blur-sm hover:-translate-y-0.5 transition-transform duration-200">
+                            Connect on LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-950 text-slate-400 py-10 text-center border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="w-8 h-8 rounded-full bg-indigo-600/20 flex items-center justify-center mx-auto mb-4">
+                <div class="w-3 h-3 rounded-full bg-indigo-500"></div>
+            </div>
+            <p class="mb-2 font-medium text-slate-300 font-maven text-lg">Girda du Toit &bull; UX Design Director &bull; London, UK</p>
+            <p class="mb-2"><a href="mailto:girdadutoit@gmail.com" class="text-indigo-400 hover:text-indigo-300 transition-colors text-sm font-medium">girdadutoit@gmail.com</a></p>
+            <p class="text-sm opacity-60">Interactive Portfolio SPA — demonstrating Information Architecture, AI Workflow & Strategic UX Leadership.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- MOBILE MENU TOGGLE ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const hamburgerBars = document.querySelectorAll('.hamburger-bar');
+        let menuOpen = false;
+
+        mobileMenuBtn.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            mobileMenu.classList.toggle('open', menuOpen);
+            mobileMenuBtn.setAttribute('aria-expanded', menuOpen);
+            hamburgerBars[0].style.transform = menuOpen ? 'translateY(7px) rotate(45deg)' : '';
+            hamburgerBars[1].style.opacity = menuOpen ? '0' : '1';
+            hamburgerBars[2].style.transform = menuOpen ? 'translateY(-7px) rotate(-45deg)' : '';
+        });
+
+        // Close menu when a link is clicked
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                menuOpen = false;
+                mobileMenu.classList.remove('open');
+                mobileMenuBtn.setAttribute('aria-expanded', false);
+                hamburgerBars[0].style.transform = '';
+                hamburgerBars[1].style.opacity = '1';
+                hamburgerBars[2].style.transform = '';
+            });
+        });
+
+        // --- DATA STORE ---
+        const workflowData = [
+            {
+                id: 'discovery',
+                title: '1. Discovery & Auditing',
+                dotColor: 'bg-indigo-500',
+                tool: 'Custom AI Agents & Figma Make',
+                description: 'I begin by training a custom AI agent to thoroughly read and understand a specific website\'s current journey. We analyse data points and identify pain points collaboratively.',
+                outcome: 'Generates a concise, visually appealing UX audit. I then use Figma Make to rapidly create interactive presentation decks for case studies and audits, significantly enhancing efficiency and stakeholder alignment.'
+            },
+            {
+                id: 'collaboration',
+                title: '2. Cross-Functional Alignment',
+                dotColor: 'bg-violet-500',
+                tool: 'Notebook LM',
+                description: 'I collaborate closely with project managers and content creators within Notebook LM. By centralising all project documents, research, and notes into one AI-powered workspace, we create a shared, intelligent single source of truth.',
+                outcome: 'Eliminates knowledge silos and ensures no critical information or client requirement is overlooked or missed, drastically improving team cohesion and operational efficiency.'
+            },
+            {
+                id: 'architecture',
+                title: '3. Sitemapping & Logic',
+                dotColor: 'bg-fuchsia-500',
+                tool: 'Claude & Relume.io',
+                description: 'Collaborating with Claude for deep strategy, I refine the sitemap and business goals. I then engineer the perfect prompt to build the initial structure in Relume.',
+                outcome: 'Increases project efficiency dramatically, cutting the time spent on structural wireframing by more than half.'
+            },
+            {
+                id: 'ui',
+                title: '4. UI & Variable Systems',
+                dotColor: 'bg-rose-500',
+                tool: 'Relume & Figma',
+                description: 'Once the core logic flows, I use Relume to rapidly build out the structural blocks. I then move the framework into Figma to apply the style guide, create the variable systems, and finalise the polished UI components.',
+                outcome: 'Saves more than 50% of the normal time spent building out components, blocks, and variables manually.'
+            },
+            {
+                id: 'handoff',
+                title: '5. Prototype & Dev Handoff',
+                dotColor: 'bg-amber-500',
+                tool: 'Design.md',
+                description: 'I finalise interactions and copy to ensure the prototype mirrors the staging site exactly. I then create a comprehensive Design.md file for the development team.',
+                outcome: 'Ensures a seamless transition to developers, maintaining high standards and minimising changes during the QA process.'
+            }
+        ];
+
+        const projectData = [
+            {
+                name: 'Sendero Consulting',
+                sector: 'Consulting',
+                desc: 'End-to-end user experience and brand redesign. Elevated the user journey and visual identity to align with business goals.',
+                tags: ['Brand Refresh', 'Journey Redesign', 'End-to-End UX'],
+                url: 'https://senderoconsulting.com/'
+            },
+            {
+                name: 'UX Audit & Case Studies',
+                sector: 'Strategy & Presentation',
+                desc: 'Interactive presentation decks for case studies and audits using Figma Make to enhance workflow efficiency and drive stakeholder engagement.',
+                tags: ['Figma Make', 'AI-Powered', 'Stakeholder Alignment'],
+                url: 'https://www.figma.com/make/9Yk4vjpri2LJqTKtApz254/UX-Case-Study-Presentation?fullscreen=1&t=7vAa9uQ4ASAjnOmA-1',
+                linkText: 'View Interactive Deck'
+            },
+            {
+                name: 'BrickTops',
+                sector: 'Hospitality',
+                desc: 'Complete redesign of a high-traffic hospitality website, optimising the digital reservation and menu exploration journey.',
+                tags: ['Conversion Optimised', 'High-Traffic UX', 'Journey Mapping'],
+                isConfidential: true
+            },
+            {
+                name: 'Make it in America',
+                sector: 'Campaign',
+                desc: 'Designed the campaign site UX, focusing on clear messaging hierarchies and high-conversion user pathways.',
+                tags: ['Campaign UX', 'Conversion Focus', 'Content Strategy'],
+                url: 'https://makeit.org/'
+            },
+            {
+                name: 'DAY ONE Early Learning',
+                sector: 'Education',
+                desc: 'Website redesign for Geraldine Laybourne. Focused on creating an intuitive, accessible experience for early childhood education.',
+                tags: ['Accessibility First', 'WCAG Compliant', 'User Research'],
+                isConfidential: true
+            },
+            {
+                name: 'ADVI Health',
+                sector: 'Healthcare',
+                desc: 'Mapping and redesigning the digital presence to elevate their look, feel, and complex user journey.',
+                tags: ['Complex Journey', 'UX Strategy', 'In Design Phase'],
+                isBuildPhase: true
+            },
+            {
+                name: 'KorroBio',
+                sector: 'BioPharma',
+                desc: 'Delivered a comprehensive digital experience, balancing complex scientific data with accessible, user-centric design.',
+                tags: ['Scientific UX', 'Data Visualisation', 'End-to-End UX'],
+                url: 'https://www.korrobio.com/'
+            }
+        ];
+
+        // --- INTERACTION LOGIC: Workflow Explorer ---
+        const navContainer = document.getElementById('workflow-nav');
+        const contentContainer = document.getElementById('workflow-content');
+        let activeWorkflowId = 'discovery';
+
+        function renderWorkflowNav() {
+            navContainer.innerHTML = workflowData.map(step => `
+                <button 
+                    onclick="updateWorkflow('${step.id}')"
+                    class="w-full text-left px-5 py-4 rounded-xl font-medium transition-all duration-300 border-l-4 flex items-center ${activeWorkflowId === step.id ? 'bg-white shadow-lg shadow-slate-200/50 border-indigo-600 text-indigo-700 scale-[1.02]' : 'border-transparent text-slate-500 hover:bg-slate-200/50 hover:text-slate-800'}"
+                >
+                    <div class="w-2.5 h-2.5 rounded-full ${step.dotColor} mr-3 flex-shrink-0"></div>
+                    <span class="font-maven text-lg">${step.title}</span>
+                </button>
+            `).join('');
+        }
+
+        function renderWorkflowContent(id) {
+            const step = workflowData.find(s => s.id === id);
+            contentContainer.innerHTML = `
+                <div class="fade-in">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 bg-indigo-50 border border-indigo-100 text-indigo-700 rounded-md text-xs font-bold uppercase tracking-wider mb-6 font-maven">
+                        <div class="w-1.5 h-1.5 rounded-full ${step.dotColor}"></div> Core Tool: ${step.tool}
+                    </div>
+                    <h3 class="text-3xl font-extrabold text-slate-900 mb-5 tracking-tight">${step.title}</h3>
+                    <p class="text-slate-600 mb-8 text-lg leading-relaxed">${step.description}</p>
+                    <div class="bg-gradient-to-r from-slate-50 to-white p-5 rounded-xl border border-slate-200 border-l-4 border-l-violet-500 shadow-sm">
+                        <strong class="text-slate-900 text-xs font-bold uppercase tracking-widest block mb-2 text-violet-700 font-maven">Strategic Outcome:</strong>
+                        <p class="text-slate-700 leading-relaxed font-medium">${step.outcome}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        window.updateWorkflow = (id) => {
+            activeWorkflowId = id;
+            renderWorkflowNav();
+            renderWorkflowContent(id);
+        };
+
+        updateWorkflow(activeWorkflowId);
+
+        // --- INTERACTION LOGIC: Project Grid ---
+        const projectGrid = document.getElementById('project-grid');
+        projectGrid.innerHTML = projectData.map(proj => `
+            <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 hover:-translate-y-1.5 hover:border-indigo-200 transition-all duration-300 group flex flex-col h-full relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-indigo-50/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                <div class="relative z-10 flex flex-col h-full">
+                    <!-- Sector badge -->
+                    <div class="text-[10px] font-bold text-indigo-700 uppercase tracking-widest mb-3 bg-indigo-50 border border-indigo-100/50 inline-flex px-3 py-1.5 rounded-full w-max shadow-sm font-maven">${proj.sector}</div>
+                    <h3 class="text-2xl font-extrabold text-slate-900 mb-3 group-hover:text-indigo-700 transition-colors tracking-tight">${proj.name}</h3>
+                    <p class="text-slate-500 text-sm flex-grow mb-5 leading-relaxed">${proj.desc}</p>
+                    <!-- Tags -->
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        ${(proj.tags || []).map(t => `<span class="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-bold font-maven tracking-wide bg-slate-100 text-slate-600 border border-slate-200">${t}</span>`).join('')}
+                    </div>
+                    ${
+                        proj.url 
+                            ? `<a href="${proj.url}" target="_blank" rel="noopener" class="text-indigo-600 text-sm font-bold hover:text-indigo-800 hover:underline mt-auto inline-flex items-center group-hover:translate-x-1 transition-transform font-maven tracking-wide">${proj.linkText || 'View Live Site'} <span class="ml-1">&#x2192;</span></a>` 
+                        : proj.isBuildPhase 
+                            ? `<span class="text-amber-600 text-sm font-bold mt-auto flex items-center gap-2 font-maven tracking-wide"><span class="relative flex h-2.5 w-2.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500"></span></span> In Build Phase</span>`
+                        : proj.isConfidential 
+                            ? `<span class="text-slate-500 text-[13px] font-medium mt-auto flex items-start gap-2.5 bg-slate-50 p-3 rounded-xl border border-slate-200"><span class="text-slate-400 text-sm leading-none mt-0.5">&#x1F512;</span> <span class="leading-snug">Confidential. Available for live walkthrough.</span></span>`
+                        : '<span class="text-slate-400 text-sm font-bold mt-auto italic font-maven">Pre-release / Internal</span>'
+                    }
+                </div>
+            </div>
+        `).join('');
+
+        // --- DATA VISUALIZATION: Chart.js ---
+        Chart.defaults.font.family = "'Inter', sans-serif";
+        Chart.defaults.color = '#64748b';
+
+        // 1. Efficiency Bar Chart
+        const ctxEfficiency = document.getElementById('efficiencyChart').getContext('2d');
+        const gradientBlue = ctxEfficiency.createLinearGradient(0, 0, 0, 400);
+        gradientBlue.addColorStop(0, '#4f46e5');
+        gradientBlue.addColorStop(1, '#8b5cf6');
+
+        new Chart(ctxEfficiency, {
+            type: 'bar',
+            data: {
+                labels: ['Discovery & Audit', 'Team Alignment', 'Sitemapping/Wireframes', 'UI & Variables', 'QA & Handoff'],
+                datasets: [
+                    {
+                        label: 'Traditional Process Time',
+                        data: [100, 100, 100, 100, 100],
+                        backgroundColor: '#cbd5e1',
+                        borderRadius: 6,
+                        borderSkipped: false
+                    },
+                    {
+                        label: 'Girda\'s AI Workflow Time',
+                        data: [60, 40, 45, 45, 75],
+                        backgroundColor: gradientBlue,
+                        borderRadius: 6,
+                        borderSkipped: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { 
+                        position: 'top',
+                        labels: { font: { family: "'Maven Pro', sans-serif", weight: 'bold', size: 14 }, usePointStyle: true, padding: 20 }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                        titleFont: { family: "'Maven Pro', sans-serif", size: 14 },
+                        bodyFont: { family: "'Inter', sans-serif", size: 13 },
+                        padding: 12,
+                        cornerRadius: 8,
+                        callbacks: {
+                            label: function(context) {
+                                const saving = context.datasetIndex === 1 ? ` (${100 - context.parsed.y}% saved)` : '';
+                                return context.dataset.label + ': ' + context.parsed.y + '% of base time' + saving;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 110,
+                        title: { display: true, text: 'Relative Time Spent (% of baseline)', font: { family: "'Maven Pro', sans-serif", weight: 'bold', size: 13 } },
+                        grid: { color: '#f1f5f9', borderDash: [5, 5] },
+                        border: { display: false }
+                    },
+                    x: {
+                        grid: { display: false },
+                        border: { display: false },
+                        ticks: { font: { family: "'Maven Pro', sans-serif", weight: '600' } }
+                    }
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
