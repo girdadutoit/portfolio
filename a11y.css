@@ -1,0 +1,315 @@
+/* ===== GoodLet — A11y + Responsive layer =====
+   Loaded AFTER styles.css so these rules override.
+   - AA-safe contrast refinements (darkens muted text tokens to meet 4.5:1 against cream)
+   - Universal focus-visible treatment (keyboard users always see focus)
+   - Responsive breakpoints: tablet (<=1024px) and mobile (<=720px)
+   - Prefers-reduced-motion support
+   - High-contrast mode (toggled via html[data-a11y-contrast="high"])
+   - Larger text mode (toggled via html[data-a11y-size="large"])
+*/
+
+/* ─── AA contrast refinements ────────────────────────────────────────────
+   Against cream (oklch 0.985) an AA 4.5:1 body text needs roughly L<=0.45.
+   --ink-3 (L=0.52) fails for small text; lift to L=0.42.
+   --ink-4 was only used for icons/hairlines; we keep it but never for text. */
+:root {
+  --ink-3: oklch(0.42 0.02 30);   /* was 0.52 — now AA for body */
+  --ink-2: oklch(0.30 0.02 30);   /* was 0.35 — stronger body copy */
+  --line-2: oklch(0.78 0.02 40);  /* was 0.84 — visible separators */
+  --coral-700: oklch(0.46 0.16 26);  /* was 0.50 — AA on white/cream */
+}
+
+/* ─── Focus-visible — strong, consistent, never hidden ──────────────── */
+*:focus { outline: none; }
+*:focus-visible {
+  outline: 3px solid var(--coral-500);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex="0"]:focus-visible {
+  outline: 3px solid var(--coral-500);
+  outline-offset: 3px;
+}
+/* On dark bands use cream ring */
+.dark-band :focus-visible,
+[data-dark] :focus-visible {
+  outline-color: var(--cream);
+}
+
+/* ─── Skip link — keyboard-first navigation ────────────────────────── */
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 16px;
+  z-index: 10000;
+  padding: 12px 20px;
+  background: var(--ink);
+  color: var(--cream);
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: top .18s ease;
+}
+.skip-link:focus, .skip-link:focus-visible {
+  top: 16px;
+  outline: 3px solid var(--coral-500);
+  outline-offset: 3px;
+}
+
+/* ─── Min 44×44 touch targets on coarse pointers (mobile/tablet) ──── */
+@media (pointer: coarse) {
+  .btn-sm,
+  button[class*="btn"]:not(.btn-icon) { min-height: 44px; }
+  a, button { min-height: 44px; }
+  a:where(.text-link, [class*="link"]) { min-height: auto; }
+  /* Inline text links inside paragraphs don't need 44px */
+  p a, li a, span a { min-height: 0; }
+}
+
+/* ─── Images always announce alt or alt="" ─── */
+img:not([alt]) { outline: 2px dashed var(--err); }
+
+/* ─── Interactive cards get pointer + keyboard affordance ─── */
+[role="button"], [role="link"] {
+  cursor: pointer;
+}
+
+/* ─── Reduced motion ────────────────────────────────────────────────
+   Honor user prefs; also triggered manually via [data-a11y-motion="reduced"]. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .marquee { animation: none !important; }
+}
+html[data-a11y-motion="reduced"] *,
+html[data-a11y-motion="reduced"] *::before,
+html[data-a11y-motion="reduced"] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+}
+html[data-a11y-motion="reduced"] .marquee { animation: none !important; }
+
+/* ─── High-contrast mode (toggleable) ─────────────────────────────── */
+html[data-a11y-contrast="high"] {
+  --ink: #000;
+  --ink-2: #000;
+  --ink-3: #1a1a1a;
+  --ink-4: #333;
+  --cream: #fff;
+  --cream-2: #f5f5f5;
+  --line: #000;
+  --line-2: #000;
+  --coral-500: oklch(0.55 0.19 28);
+  --coral-600: oklch(0.48 0.19 28);
+  --coral-700: oklch(0.40 0.17 28);
+}
+html[data-a11y-contrast="high"] .glass,
+html[data-a11y-contrast="high"] .glass-strong {
+  background: #fff !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 2px solid #000 !important;
+}
+html[data-a11y-contrast="high"] .solid-card {
+  border: 2px solid #000 !important;
+  box-shadow: none !important;
+}
+html[data-a11y-contrast="high"] .btn { border-width: 2px !important; }
+html[data-a11y-contrast="high"] .btn-ghost {
+  background: #fff !important;
+  border-color: #000 !important;
+  color: #000 !important;
+}
+html[data-a11y-contrast="high"] .amb-bg,
+html[data-a11y-contrast="high"] .quiet-bg {
+  background: #fff !important;
+}
+html[data-a11y-contrast="high"] .amb-bg::before,
+html[data-a11y-contrast="high"] .amb-bg::after { display: none; }
+html[data-a11y-contrast="high"] .chip { border: 2px solid #000 !important; }
+
+/* ─── Larger text mode ────────────────────────────────────────────── */
+html[data-a11y-size="large"] { font-size: 18px; }
+html[data-a11y-size="large"] .display { letter-spacing: -0.005em; }
+html[data-a11y-size="xlarge"] { font-size: 20px; }
+
+/* ─── Responsive breakpoints ──────────────────────────────────────── */
+
+/* Tablet: <=1024px — compress gutters, shrink display type, stack sidebars */
+@media (max-width: 1024px) {
+  .container { padding: 0 20px; }
+  .container-wide { padding: 0 20px; }
+
+  /* Tame display headings so they don't overflow */
+  .display {
+    font-size: clamp(30px, 5.2vw, 56px) !important;
+  }
+
+  /* Any 2-col right-rail layout stacks */
+  [data-layout="two-col"] { grid-template-columns: 1fr !important; }
+
+  /* Dashboards: sidebar becomes top bar */
+  [data-layout="dashboard"] { grid-template-columns: 1fr !important; }
+  [data-layout="dashboard"] aside {
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--line);
+  }
+
+  /* Sticky rails release on tablet */
+  [data-sticky-rail] { position: static !important; }
+}
+
+/* Mobile: <=720px — aggressive stacking, full-width CTAs, collapse grids */
+@media (max-width: 720px) {
+  :root { --r-lg: 18px; --r-xl: 22px; --r-2xl: 28px; }
+
+  body { font-size: 15px; }
+
+  .container, .container-wide { padding: 0 16px; }
+
+  /* Force single-column grids on anything using grid-template-columns */
+  [style*="grid-template-columns: repeat(3"],
+  [style*="grid-template-columns: repeat(4"],
+  [style*="grid-template-columns: repeat(5"],
+  [style*="grid-template-columns: 1fr 1fr 1fr"],
+  [style*="grid-template-columns: 1fr 1fr"],
+  [style*="grid-template-columns:'1fr 1fr"],
+  [style*="gridTemplateColumns"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Shrink max-widths so content fits */
+  [style*="max-width: 1240"],
+  [style*="max-width: 1200"],
+  [style*="max-width: 1040"],
+  [style*="max-width: 960"],
+  [style*="max-width: 780"],
+  [style*="max-width: 720"],
+  [style*="max-width: 640"] { max-width: 100% !important; }
+
+  /* Padding reduction for high-padding sections */
+  [style*="padding: 80px"],
+  [style*="padding: 72px"],
+  [style*="padding: 56px"] { padding: 40px 16px !important; }
+
+  /* Display type */
+  .display { font-size: clamp(26px, 8vw, 40px) !important; line-height: 1.1 !important; }
+
+  /* Stack flex rows that are acting like 2-col layouts */
+  [data-stack-mobile] { flex-direction: column !important; align-items: stretch !important; }
+
+  /* Hide purely decorative elements on mobile */
+  [data-hide-mobile] { display: none !important; }
+
+  /* Full-width pill CTAs inside forms / CTA clusters */
+  [data-cta-cluster] { flex-direction: column !important; }
+  [data-cta-cluster] .btn { width: 100% !important; }
+
+  /* Tables become scroll-x containers */
+  .tbl { display: block; overflow-x: auto; white-space: nowrap; }
+
+  /* Avatar sizes cap */
+  .avatar { max-width: 64px; max-height: 64px; }
+
+  /* Score big number scales down */
+  .score-big { font-size: clamp(56px, 14vw, 80px); }
+}
+
+/* Extra-small: <=380px — iPhone SE, etc. */
+@media (max-width: 380px) {
+  :root { --r-lg: 14px; }
+  .container, .container-wide { padding: 0 12px; }
+  .btn { padding: 0 16px; font-size: 14px; }
+  .btn-lg { padding: 0 18px; font-size: 15px; }
+}
+
+/* ─── Print ────────────────────────────────────────────────────────── */
+@media print {
+  .amb-bg, .quiet-bg, nav, .skip-link, [data-hide-print] { display: none !important; }
+  .solid-card, .glass { box-shadow: none !important; border: 1px solid #ccc !important; }
+  body { background: #fff !important; color: #000 !important; }
+}
+
+/* ─── Marketing nav: mobile hamburger ─── */
+@media (max-width: 860px) {
+  nav[data-nav-primary] { display: none !important; }
+  [data-nav-actions] { gap: 8px !important; }
+  [data-nav-signin] { display: none !important; }
+  [data-nav-burger] { display: inline-flex !important; }
+}
+
+/* ─── Marketing hero & collage ─── */
+@media (max-width: 960px) {
+  [data-hero-grid] {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+  [data-hero-collage] {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
+  }
+  [data-hero-collage] > * {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+  }
+}
+
+/* ─── Any two-column split layouts ─── */
+@media (max-width: 960px) {
+  [data-split-2col] {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+}
+
+/* ─── Dashboard layout: sidebar → topbar on tablet ─── */
+@media (max-width: 1024px) {
+  [data-app-layout] {
+    grid-template-columns: 1fr !important;
+  }
+  [data-app-sidebar] {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 50;
+    width: 100% !important;
+    height: auto !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--line) !important;
+    padding: 8px 12px !important;
+  }
+  [data-app-sidebar] [data-sidebar-nav] {
+    flex-direction: row !important;
+    gap: 4px !important;
+  }
+  [data-app-sidebar] [data-sidebar-footer] { display: none !important; }
+}
+
+/* ─── Apply flow: stack 2-col step layouts on mobile ─── */
+@media (max-width: 900px) {
+  [data-apply-2col] {
+    grid-template-columns: 1fr !important;
+  }
+  [data-apply-rail] {
+    position: static !important;
+    max-height: none !important;
+  }
+}
+.sr-only {
+  position: absolute !important;
+  width: 1px !important; height: 1px !important;
+  padding: 0 !important; margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0,0,0,0) !important;
+  white-space: nowrap !important; border: 0 !important;
+}
