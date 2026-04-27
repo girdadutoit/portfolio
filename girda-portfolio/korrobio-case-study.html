@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KorroBio — Case Study | Girda du Toit</title>
+    <meta name="description" content="KorroBio case study — BioPharma UX designed entirely in Figma.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%25' stop-color='%23a78bfa'/><stop offset='100%25' stop-color='%2338bdf8'/></linearGradient></defs><circle cx='16' cy='16' r='16' fill='url(%23g)'/><circle cx='16' cy='16' r='6' fill='white' opacity='0.9'/></svg>">
+    <style>
+        :root {
+            --glass-bg: rgba(255,255,255,0.55);
+            --glass-bg-strong: rgba(255,255,255,0.72);
+            --glass-border: rgba(255,255,255,0.7);
+            --glass-shadow: 0 8px 32px rgba(120,100,200,0.10), 0 1.5px 8px rgba(120,100,200,0.07);
+            --glass-shadow-hover: 0 24px 64px rgba(120,100,200,0.18), 0 4px 16px rgba(120,100,200,0.12);
+            --blur: blur(18px);
+            --text-primary: #1e1b2e;
+            --text-secondary: #4a4568;
+            --text-muted: #7c7a9a;
+            --accent: #7c3aed;
+        }
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text-primary);
+            background: #f0eeff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1,h2,h3,h4,h5,.font-display { font-family: 'Syne', sans-serif; }
+
+        body::before {
+            content: '';
+            position: fixed; inset: 0; z-index: -2;
+            background:
+                radial-gradient(ellipse 80% 60% at 15% 10%, rgba(196,181,253,0.55) 0%, transparent 60%),
+                radial-gradient(ellipse 70% 50% at 85% 15%, rgba(147,197,253,0.45) 0%, transparent 55%),
+                radial-gradient(ellipse 60% 70% at 75% 75%, rgba(249,168,212,0.35) 0%, transparent 55%),
+                radial-gradient(ellipse 80% 50% at 20% 80%, rgba(110,231,183,0.30) 0%, transparent 55%),
+                linear-gradient(160deg, #f0eeff 0%, #e8f4fd 40%, #fdf0f8 100%);
+            pointer-events: none;
+        }
+        body::after {
+            content: '';
+            position: fixed; inset: 0; z-index: -1;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
+            opacity: 0.4; pointer-events: none;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: var(--blur);
+            -webkit-backdrop-filter: var(--blur);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: var(--glass-shadow);
+            transition: box-shadow 0.4s ease, transform 0.4s ease;
+        }
+        .glass-card:hover { box-shadow: var(--glass-shadow-hover); transform: translateY(-3px); }
+
+        .glass-card-strong {
+            background: var(--glass-bg-strong);
+            backdrop-filter: var(--blur);
+            -webkit-backdrop-filter: var(--blur);
+            border: 1px solid rgba(255,255,255,0.85);
+            border-radius: 24px;
+            box-shadow: var(--glass-shadow);
+        }
+
+        .nav-glass {
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(255,255,255,0.7);
+            box-shadow: 0 2px 24px rgba(120,100,200,0.07);
+        }
+
+        .grad-text {
+            background: linear-gradient(135deg, #7c3aed 0%, #2563eb 40%, #db2777 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .grad-text-soft {
+            background: linear-gradient(120deg, #6d28d9 0%, #0ea5e9 60%, #ec4899 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+
+        .pill {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 5px 14px; border-radius: 999px;
+            font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+            text-transform: uppercase; font-family: 'Syne', sans-serif;
+        }
+        .pill-glass { background: rgba(255,255,255,0.65); border: 1px solid rgba(255,255,255,0.9); backdrop-filter: blur(8px); color: #6d28d9; box-shadow: 0 2px 8px rgba(120,100,200,0.10); }
+        .pill-indigo { background: rgba(139,92,246,0.12); border: 1px solid rgba(139,92,246,0.25); color: #6d28d9; }
+        .pill-rose { background: rgba(244,114,182,0.12); border: 1px solid rgba(244,114,182,0.30); color: #be185d; }
+        .pill-sky { background: rgba(56,189,248,0.12); border: 1px solid rgba(56,189,248,0.30); color: #0369a1; }
+        .pill-slate { background: rgba(148,163,184,0.15); border: 1px solid rgba(148,163,184,0.30); color: #475569; }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #7c3aed, #2563eb);
+            color: white; border-radius: 999px; padding: 11px 26px;
+            font-family: 'Syne', sans-serif; font-weight: 700; font-size: 13px;
+            letter-spacing: 0.04em; box-shadow: 0 4px 20px rgba(124,58,237,0.35);
+            transition: all 0.3s ease; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(124,58,237,0.45); }
+
+        .btn-ghost {
+            background: rgba(255,255,255,0.65); border: 1px solid rgba(255,255,255,0.9);
+            backdrop-filter: blur(8px); color: #6d28d9; border-radius: 999px; padding: 11px 26px;
+            font-family: 'Syne', sans-serif; font-weight: 700; font-size: 13px;
+            transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+        }
+        .btn-ghost:hover { background: rgba(255,255,255,0.85); transform: translateY(-2px); }
+
+        .section-label {
+            font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700;
+            letter-spacing: 0.14em; text-transform: uppercase; color: #8b5cf6;
+            margin-bottom: 10px; display: block;
+        }
+
+        .card-accent-1 { background: linear-gradient(135deg, rgba(196,181,253,0.4), rgba(147,197,253,0.3)); }
+        .card-accent-2 { background: linear-gradient(135deg, rgba(249,168,212,0.35), rgba(196,181,253,0.35)); }
+        .card-accent-3 { background: linear-gradient(135deg, rgba(110,231,183,0.3), rgba(147,197,253,0.35)); }
+        .card-accent-4 { background: linear-gradient(135deg, rgba(253,230,138,0.3), rgba(249,168,212,0.35)); }
+        .card-accent-5 { background: linear-gradient(135deg, rgba(196,181,253,0.35), rgba(110,231,183,0.3)); }
+        .card-accent-6 { background: linear-gradient(135deg, rgba(147,197,253,0.35), rgba(249,168,212,0.3)); }
+
+        .cta-mesh {
+            background: linear-gradient(135deg, rgba(124,58,237,0.92), rgba(37,99,235,0.90), rgba(219,39,119,0.85));
+            border-radius: 32px; position: relative; overflow: hidden;
+        }
+
+        .fade-in { animation: fadeUp 0.5s cubic-bezier(0.22,1,0.36,1) both; }
+        @keyframes fadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(139,92,246,0.25); border-radius: 3px; }
+        :focus-visible { outline: 2px solid #7c3aed; outline-offset: 3px; border-radius: 8px; }
+
+        .orb { position: absolute; border-radius: 50%; filter: blur(50px); opacity: 0.5; pointer-events: none; animation: orb-float 8s ease-in-out infinite; }
+        @keyframes orb-float { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-18px) scale(1.04); } }
+
+        .feature-icon { width: 44px; height: 44px; border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .feature-icon svg { width: 20px; height: 20px; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+    </style>
+</head><nav class="nav-glass sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
+        <div class="flex justify-between items-center h-16">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="inline-flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-full glass-card-strong hover:shadow-md transition-all duration-200" style="color:var(--text-secondary);background:rgba(255,255,255,0.7)">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+                    Portfolio
+                </a>
+                <div class="hidden sm:flex items-center gap-2 text-sm" style="color:var(--text-muted)">
+                    <span>/</span>
+                    <span class="font-semibold" style="font-family:Syne,sans-serif;color:var(--text-primary)">KorroBio</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="hidden md:flex gap-6 text-sm font-medium" style="color:var(--text-secondary)">
+                    <a href="#overview" class="hover:text-violet-600 transition-colors">Overview</a>
+<a href="#process" class="hover:text-violet-600 transition-colors">Process</a>
+                </div>
+                <a href="https://www.korrobio.com/" target="_blank" rel="noopener" class="btn-primary" style="padding:8px 18px;font-size:12px">View Live Site<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:6px"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>
+            </div>
+        </div>
+    </div>
+</nav>
+<body>
+<main class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 pt-12 pb-24 space-y-24">
+
+    <section class="relative pt-10 pb-4 max-w-4xl mx-auto fade-in">
+        <div class="orb w-56 h-56 -top-20 -left-16" style="background:radial-gradient(circle,rgba(110,231,183,0.6),transparent 70%)"></div>
+        <div class="orb w-44 h-44 top-0 right-0" style="background:radial-gradient(circle,rgba(147,197,253,0.6),transparent 70%);animation-delay:2s"></div>
+        <div class="relative z-10">
+            <div class="flex flex-wrap gap-2 mb-8">
+                <span class="pill pill-glass"><span class="w-1.5 h-1.5 rounded-full bg-violet-500 animate-pulse"></span>Case Study</span>
+                <span class="pill pill-indigo">BioPharma</span>
+                <span class="pill pill-sky">Figma</span>
+                <span class="pill pill-slate">Pre-AI Workflow</span>
+            </div>
+            <h1 class="font-display font-extrabold tracking-tight mb-5 leading-none grad-text" style="font-size:clamp(3rem,8vw,5.5rem)">KorroBio</h1>
+            <p class="font-display font-semibold mb-6" style="font-size:clamp(1.2rem,2.5vw,1.8rem);color:var(--text-secondary)">Science. Made accessible.</p>
+            <p class="text-lg leading-relaxed mb-10 max-w-2xl font-light" style="color:var(--text-secondary)">A full digital experience for a BioPharma company — making complex science feel clear and approachable. This was done entirely in Figma before I started using AI in my workflow, so it's a good reflection of where my craft was at.</p>
+            <div class="flex flex-wrap gap-3">
+                <a href="https://www.korrobio.com/" target="_blank" rel="noopener" class="btn-primary">View Live Site <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>
+            </div>
+        </div>
+    </section>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="glass-card p-6 text-center relative overflow-hidden">
+            <div class="card-accent-3 absolute inset-0 rounded-3xl opacity-50 pointer-events-none"></div>
+            <div class="relative z-10">
+                <div class="font-display font-extrabold mb-1" style="font-size:2.2rem;color:#7c3aed">Figma</div>
+                <div class="text-xs font-semibold uppercase tracking-widest" style="color:var(--text-muted);font-family:Syne,sans-serif">End-to-End</div>
+            </div>
+        </div><div class="glass-card p-6 text-center relative overflow-hidden">
+            <div class="card-accent-5 absolute inset-0 rounded-3xl opacity-50 pointer-events-none"></div>
+            <div class="relative z-10">
+                <div class="font-display font-extrabold mb-1" style="font-size:2.2rem;color:#7c3aed">UX</div>
+                <div class="text-xs font-semibold uppercase tracking-widest" style="color:var(--text-muted);font-family:Syne,sans-serif">Data Visualisation</div>
+            </div>
+        </div><div class="glass-card p-6 text-center relative overflow-hidden">
+            <div class="card-accent-1 absolute inset-0 rounded-3xl opacity-50 pointer-events-none"></div>
+            <div class="relative z-10">
+                <div class="font-display font-extrabold mb-1" style="font-size:2.2rem;color:#7c3aed">Live</div>
+                <div class="text-xs font-semibold uppercase tracking-widest" style="color:var(--text-muted);font-family:Syne,sans-serif">In Production</div>
+            </div>
+        </div>
+    </div>
+
+    <section id="overview" class="scroll-mt-24">
+        <div class="text-center mb-10">
+            <span class="section-label">Overview</span>
+            <h2 class="font-display font-extrabold text-3xl md:text-4xl grad-text-soft">Making cutting-edge science feel approachable.</h2>
+        </div>
+        <div class="glass-card p-8 md:p-12 relative overflow-hidden">
+            <div class="card-accent-3 absolute inset-0 rounded-3xl opacity-20 pointer-events-none"></div>
+            <div class="relative z-10">
+                <p class="text-base leading-relaxed mb-6" style="color:var(--text-secondary)">KorroBio's work is genuinely complex — they're doing cutting-edge stuff at the intersection of biology and tech. The challenge was making that feel accessible and trustworthy to very different audiences: investors, researchers, and patients all needed to land on the same site and feel like it was made for them.</p>
+                <p class="text-base leading-relaxed mb-4" style="color:var(--text-secondary)">This was done before I introduced AI into my workflow — just Figma, research, and a lot of design thinking. I'm proud of it. It's also a useful benchmark: the same project today would take significantly less time.</p>
+                <div class="glass-card-strong p-5 rounded-2xl inline-flex items-center gap-3 mt-2">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <p class="text-sm font-medium" style="color:var(--text-secondary)">If I was doing this project today, the research, sitemapping, and wireframing would be done in a fraction of the time. But the design itself? That would still look the same — because that part was never about speed.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="process" class="scroll-mt-24">
+        <div class="text-center mb-10">
+            <span class="section-label">Process</span>
+            <h2 class="font-display font-extrabold text-3xl md:text-4xl grad-text-soft">Pure Figma craft.</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div class="glass-card p-7 relative overflow-hidden group">
+                <div class="card-accent-3 absolute inset-0 rounded-3xl opacity-40 pointer-events-none transition-opacity duration-300 group-hover:opacity-65"></div>
+                <div class="relative z-10">
+                    <div class="feature-icon mb-4" style="background:rgba(139,92,246,0.15)">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#6d28d9" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                    </div>
+                    <span class="pill pill-sky mb-3">Research</span>
+                    <h3 class="font-display font-bold text-lg mb-2" style="color:var(--text-primary)">UX Research & Strategy</h3>
+                    <p class="text-sm leading-relaxed" style="color:var(--text-secondary)">I spent real time understanding how BioPharma companies communicate — what works, what doesn't, and how to make dense scientific content feel clear without dumbing it down.</p>
+                </div>
+            </div><div class="glass-card p-7 relative overflow-hidden group">
+                <div class="card-accent-5 absolute inset-0 rounded-3xl opacity-40 pointer-events-none transition-opacity duration-300 group-hover:opacity-65"></div>
+                <div class="relative z-10">
+                    <div class="feature-icon mb-4" style="background:rgba(139,92,246,0.15)">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#6d28d9" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+                    </div>
+                    <span class="pill pill-indigo mb-3">Design</span>
+                    <h3 class="font-display font-bold text-lg mb-2" style="color:var(--text-primary)">End-to-End in Figma</h3>
+                    <p class="text-sm leading-relaxed" style="color:var(--text-secondary)">Everything was built in Figma — information architecture, visual design, data visualisation, the full component library, and a clean developer handoff. It was thorough, methodical work.</p>
+                </div>
+            </div><div class="glass-card p-7 relative overflow-hidden group">
+                <div class="card-accent-1 absolute inset-0 rounded-3xl opacity-40 pointer-events-none transition-opacity duration-300 group-hover:opacity-65"></div>
+                <div class="relative z-10">
+                    <div class="feature-icon mb-4" style="background:rgba(139,92,246,0.15)">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#6d28d9" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8v5l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <span class="pill pill-rose mb-3">Reflection</span>
+                    <h3 class="font-display font-bold text-lg mb-2" style="color:var(--text-primary)">Before AI — Full Craft Timeline</h3>
+                    <p class="text-sm leading-relaxed" style="color:var(--text-secondary)">Looking back, this project took a lot longer than it needed to. The structural work — sitemapping, wireframing, building components — is exactly what I now let AI handle. The difference in delivery time is significant.</p>
+                </div>
+            </div><div class="glass-card p-7 relative overflow-hidden group">
+                <div class="card-accent-2 absolute inset-0 rounded-3xl opacity-40 pointer-events-none transition-opacity duration-300 group-hover:opacity-65"></div>
+                <div class="relative z-10">
+                    <div class="feature-icon mb-4" style="background:rgba(139,92,246,0.15)">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#6d28d9" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+                    </div>
+                    <span class="pill pill-slate mb-3">Outcome</span>
+                    <h3 class="font-display font-bold text-lg mb-2" style="color:var(--text-primary)">Live & Performing</h3>
+                    <p class="text-sm leading-relaxed" style="color:var(--text-secondary)">The site launched and the client was happy. It's a project I'm proud of — particularly because it shows what's possible with pure craft and no shortcuts. The work file is confidential but I'm always happy to do a walkthrough.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+<footer style="background:rgba(30,27,46,0.96);border-top:1px solid rgba(255,255,255,0.07)" class="text-center py-10 px-5">
+    <div class="w-8 h-8 rounded-full mx-auto mb-4 flex items-center justify-center" style="background:linear-gradient(135deg,rgba(139,92,246,0.3),rgba(96,165,250,0.3))">
+        <div class="w-3 h-3 rounded-full" style="background:rgba(196,181,253,0.7)"></div>
+    </div>
+    <p class="font-display font-semibold mb-1" style="color:rgba(255,255,255,0.85)">Girda du Toit &bull; Senior Lead Designer &bull; London, UK</p>
+    <p class="text-xs" style="color:rgba(255,255,255,0.35)">girdadutoit@gmail.com &bull; girdadutoit.vercel.app</p>
+</footer>
+</body>
+</html>
