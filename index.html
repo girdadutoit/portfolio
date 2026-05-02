@@ -207,7 +207,7 @@
             max-width: 800px;
             margin: 0 auto;
             height: 40vh;
-            min-height: 300px;
+            min-height: 340px;  /* was 300px */
             max-height: 450px;
         }
 
@@ -741,7 +741,14 @@
     new Chart(ctx, {
         type:'bar',
         data:{
-            labels:['Discovery & Audit','Team Alignment','Sitemapping/Wireframes','Design & UI','QA & Handoff'],
+           labels:[
+            ['Discovery','& Audit'],
+            ['Team','Alignment'],
+            ['Sitemapping /','Wireframes'],
+            ['Design','& UI'],
+            ['QA &','Handoff']
+            ],
+            
             datasets:[
                 { label:'Traditional Process', data:[100,100,100,100,100], backgroundColor:'rgba(196,181,253,0.45)', borderRadius:8, borderSkipped:false },
                 { label:"Girda's AI Workflow",  data:[60,40,45,45,75],     backgroundColor:grd,                     borderRadius:8, borderSkipped:false }
@@ -759,7 +766,21 @@
             },
             scales:{
                 y:{ beginAtZero:true, max:110, title:{display:true,text:'Relative Time (% of baseline)',font:{family:'Syne',weight:'700',size:12}}, grid:{color:'rgba(196,181,253,0.2)'}, border:{display:false} },
-                x:{ grid:{display:false}, border:{display:false}, ticks:{font:{family:'Syne',weight:'600',size:12}} }
+                x:{
+                    grid:{display:false},
+                    border:{display:false},
+                    ticks:{
+                        font: (ctx) => {
+                            const w = ctx.chart.width;
+                            const size = w < 500 ? 9 : w < 768 ? 10 : 12;
+                            return { family:'Syne', weight:'600', size };
+                        },
+                        autoSkip: false,
+                        maxRotation: 0,
+                        minRotation: 0,
+                        padding: 8
+                    }
+                }
             }
         }
     });
