@@ -127,7 +127,7 @@ const Pill = ({ children, tone = 'ok' }) => {
 const EntryListing = ({ onApply, onNew }) => {
   const p = DEMO_PROPERTY;
   return (
-    <div style={{ maxWidth: 1140, margin: '0 auto', padding: '20px 36px 60px' }}>
+    <div data-listing style={{ maxWidth: 1140, margin: '0 auto', padding: '20px 36px 60px' }}>
       {/* Back + Breadcrumb */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 18, flexWrap: 'wrap' }}>
         <BackButton label="Search" fallback="/app/tenant/search"/>
@@ -139,7 +139,7 @@ const EntryListing = ({ onApply, onNew }) => {
       </div>
 
       {/* Hero gallery */}
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: 8, height: 420, marginBottom: 28 }}>
+      <div data-gallery style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: 8, height: 420, marginBottom: 28 }}>
         <PhImg h="100%" hue={p.heroHue} label={p.gallery[0].label} style={{ gridRow: '1 / 3' }}/>
         <PhImg h="100%" hue={p.gallery[1].hue} label={p.gallery[1].label}/>
         <PhImg h="100%" hue={p.gallery[2].hue} label={p.gallery[2].label}/>
@@ -157,7 +157,7 @@ const EntryListing = ({ onApply, onNew }) => {
           <div className="display" style={{ fontSize: 52, lineHeight: 1 }}>{p.title}</div>
           <div style={{ fontSize: 17, color: 'var(--ink-2)', marginTop: 8 }}>{p.area}</div>
 
-          <div style={{ display: 'flex', gap: 24, marginTop: 22, paddingBottom: 22, borderBottom: '1px solid var(--line)' }}>
+          <div data-listing-stats style={{ display: 'flex', gap: 24, marginTop: 22, paddingBottom: 22, borderBottom: '1px solid var(--line)' }}>
             <div><div style={{ fontSize: 12, color: 'var(--ink-3)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Rent</div><div className="display" style={{ fontSize: 30, marginTop: 4 }}>£{p.price.toLocaleString()}<span style={{ fontSize: 14, color: 'var(--ink-3)', fontFamily: 'var(--font-ui)' }}> / mo</span></div></div>
             <div style={{ width: 1, background: 'var(--line)' }}/>
             <div><div style={{ fontSize: 12, color: 'var(--ink-3)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Bedrooms</div><div className="display" style={{ fontSize: 30, marginTop: 4 }}>{p.beds}</div></div>

@@ -7,15 +7,15 @@ const LandlordOverview = () => {
   return (
     <div style={{ padding: '32px 36px', display: 'flex', flexDirection: 'column', gap: 28 }}>
       {/* Stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20 }}>
+      <div data-stats-grid style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20 }}>
         {[
           { label: 'Active listings', v: '3', delta: '+1', icon: 'building' },
           { label: 'Applicants', v: '24', delta: '+6 today', icon: 'users' },
           { label: 'Avg. Care Score', v: '84', delta: 'high', icon: 'spark' },
           { label: 'Vacancy days', v: '12', delta: '−4 vs. avg', icon: 'clock' },
         ].map((s, i) => (
-          <div key={i} className="solid-card" style={{ padding: 22 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div key={i} data-stat-card className="solid-card" style={{ padding: 22 }}>
+            <div data-stat-head style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div style={{ width: 36, height: 36, borderRadius: 10, background: 'var(--coral-100)', color: 'var(--coral-700)', display: 'grid', placeItems: 'center' }}>
                 <Icon name={s.icon} size={16}/>
               </div>
@@ -28,16 +28,16 @@ const LandlordOverview = () => {
       </div>
 
       {/* Featured applicant */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: 20 }}>
-        <div className="solid-card" style={{ padding: 28 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 20 }}>
+      <div data-featured-grid style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: 20 }}>
+        <div data-top-match className="solid-card" style={{ padding: 28 }}>
+          <div data-top-match-head style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 20, gap: 12 }}>
             <div>
               <div style={{ fontSize: 13, color: 'var(--coral-700)', letterSpacing: '0.08em', textTransform: 'uppercase', fontWeight: 500 }}>Top match today</div>
               <div className="display" style={{ fontSize: 28, marginTop: 4 }}>Ayo & Sam want your place.</div>
             </div>
             <span className="chip chip-verified"><Icon name="check" size={12}/> Verified</span>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr auto', gap: 24, alignItems: 'center' }}>
+          <div data-top-match-body style={{ display: 'grid', gridTemplateColumns: 'auto 1fr auto', gap: 24, alignItems: 'center' }}>
             <Avatar name="Ayo Bankole" size={80} hue={30}/>
             <div>
               <div style={{ fontSize: 18, fontWeight: 600 }}>Ayo & Sam Bankole</div>
@@ -49,9 +49,9 @@ const LandlordOverview = () => {
                 <span className="chip chip-ok">Care Score 92</span>
               </div>
             </div>
-            <Ring value={94} size={120} label="match" color="coral"/>
+            <div data-top-match-ring><Ring value={94} size={120} label="match" color="coral"/></div>
           </div>
-          <div style={{ display: 'flex', gap: 10, marginTop: 20 }}>
+          <div data-top-match-actions style={{ display: 'flex', gap: 10, marginTop: 20, flexWrap: 'wrap' }}>
             <button className="btn btn-coral" onClick={() => go('/app/landlord/offer/ayo')}>Offer tenancy</button>
             <button className="btn btn-ghost">Message</button>
             <button className="btn btn-ghost" onClick={() => go('/app/landlord/applicant/ayo')}>View full profile <Icon name="arrowRight" size={14}/></button>
@@ -80,7 +80,7 @@ const LandlordOverview = () => {
 
       {/* My listings */}
       <div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 18 }}>
+        <div data-section-head style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 18, gap: 12 }}>
           <div className="display" style={{ fontSize: 28 }}>Your listings</div>
           <button className="btn btn-primary btn-sm" onClick={() => go('/app/landlord/listings')}>
             <Icon name="plus" size={14}/> New listing
@@ -175,24 +175,24 @@ const ApplicantCard = ({ a }) => {
         <div style={{ fontSize: 16, fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis' }}>{a.n}</div>
         <div style={{ fontSize: 12, color: 'var(--ink-3)', marginTop: 2 }}>Ref: {a.ref}</div>
       </div>
-      <Ring value={a.score} size={56} color="coral" thickness={14}/>
+      <Ring value={a.score} size={56} color="coral" thickness={10}/>
     </div>
     <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-      {a.tags.map(t => <span key={t} className="chip chip-coral" style={{ height: 24, fontSize: 11 }}>{t}</span>)}
+      {a.tags.map(t => <span key={t} className="chip chip-coral" style={{ height: 22, fontSize: 10 }}>{t}</span>)}
     </div>
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 14px', borderRadius: 12, background: 'var(--cream-2)' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 12px', borderRadius: 12, background: 'var(--cream-2)', marginTop: 'auto' }}>
       <div>
-        <div style={{ fontSize: 11, color: 'var(--ink-3)' }}>Care Score</div>
-        <div className="display" style={{ fontSize: 28, color: 'var(--coral-700)' }}>{a.care}</div>
+        <div style={{ fontSize: 10, color: 'var(--ink-3)' }}>Care Score</div>
+        <div className="display" style={{ fontSize: 24, color: 'var(--coral-700)' }}>{a.care}</div>
       </div>
-      <div style={{ fontSize: 11, color: 'var(--ink-3)', textAlign: 'right' }}>
+      <div style={{ fontSize: 10, color: 'var(--ink-3)', textAlign: 'right' }}>
         Top 15%<br/>in Hackney
       </div>
     </div>
-    <div style={{ display: 'flex', gap: 8 }} onClick={e => e.stopPropagation()}>
+    <div data-applicant-actions style={{ display: 'flex', gap: 8, alignItems: 'stretch' }} onClick={e => e.stopPropagation()}>
       <button className="btn btn-primary btn-sm" style={{ flex: 1, justifyContent: 'center' }}>Shortlist</button>
-      <button className="btn btn-ghost btn-sm"><Icon name="message" size={13}/></button>
-      <button className="btn btn-ghost btn-sm" onClick={open}><Icon name="eye" size={13}/></button>
+      <button className="btn btn-ghost btn-sm" aria-label="Message" style={{ flex: '0 0 40px', padding: 0 }}><Icon name="message" size={13}/></button>
+      <button className="btn btn-ghost btn-sm" aria-label="View profile" onClick={open} style={{ flex: '0 0 40px', padding: 0 }}><Icon name="eye" size={13}/></button>
     </div>
   </div>
   );
@@ -208,7 +208,7 @@ const LandlordScout = () => {
   ];
   return (
     <div style={{ padding: '24px 36px' }}>
-      <div className="solid-card" style={{ padding: 24, marginBottom: 20, display: 'grid', gridTemplateColumns: '1fr auto', gap: 20, alignItems: 'center',
+      <div data-scout-hero className="solid-card" style={{ padding: 24, marginBottom: 20, display: 'grid', gridTemplateColumns: '1fr auto', gap: 20, alignItems: 'center',
                                             background: 'linear-gradient(135deg, oklch(0.94 0.06 30), oklch(0.96 0.04 50))' }}>
         <div>
           <div style={{ fontSize: 13, color: 'var(--coral-700)', letterSpacing: '0.08em', textTransform: 'uppercase', fontWeight: 500 }}>Signature feature</div>
@@ -233,7 +233,7 @@ const LandlordScout = () => {
         <div className="chip chip-ok" style={{ height: 34, padding: '0 14px' }}>Live only</div>
       </div>
 
-      <div className="solid-card" style={{ padding: '4px 0' }}>
+      <div className="solid-card" data-scout-table style={{ padding: '4px 0' }}>
         <table className="tbl">
           <thead>
             <tr>
@@ -283,6 +283,42 @@ const LandlordScout = () => {
           </tbody>
         </table>
       </div>
+
+      {/* Mobile: stacked scout cards */}
+      <div data-scout-mobile style={{ display: 'none', flexDirection: 'column', gap: 12 }}>
+        {tenants.map((t, i) => (
+          <div key={i} className="solid-card" style={{ padding: 14, display: 'flex', flexDirection: 'column', gap: 12 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+              <Avatar name={t.n} size={42} hue={t.hue}/>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontSize: 14, fontWeight: 600, display: 'flex', alignItems: 'center', gap: 6 }}>
+                  {t.n}
+                  <span style={{ width: 6, height: 6, borderRadius: 99, background: 'oklch(0.68 0.14 155)', boxShadow: '0 0 0 3px oklch(0.68 0.14 155 / 0.25)', flexShrink: 0 }}/>
+                </div>
+                <div style={{ fontSize: 11, color: 'var(--ink-3)' }}>Live · searching</div>
+              </div>
+              <div style={{ textAlign: 'right' }}>
+                <div style={{ fontSize: 9, color: 'var(--ink-3)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Care</div>
+                <div className="display" style={{ fontSize: 20, color: 'var(--coral-700)', lineHeight: 1 }}>{t.score}</div>
+              </div>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, padding: '8px 0', borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)' }}>
+              <div>
+                <div style={{ fontSize: 10, color: 'var(--ink-3)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Budget</div>
+                <div style={{ fontSize: 12, marginTop: 2 }}>{t.budget}</div>
+              </div>
+              <div>
+                <div style={{ fontSize: 10, color: 'var(--ink-3)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Areas</div>
+                <div style={{ fontSize: 12, marginTop: 2 }}>{t.areas}</div>
+              </div>
+            </div>
+            <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+              {t.tags.map(tg => <span key={tg} className="chip" style={{ height: 22, fontSize: 11 }}>{tg}</span>)}
+            </div>
+            <button className="btn btn-coral btn-sm" style={{ width: '100%', justifyContent: 'center' }}>Invite to apply</button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
@@ -300,7 +336,7 @@ const LandlordListings = () => {
       <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 18 }}>
         <button className="btn btn-coral"><Icon name="plus" size={14}/> New listing</button>
       </div>
-      <div className="solid-card" style={{ padding: '4px 0' }}>
+      <div className="solid-card" data-listings-table style={{ padding: '4px 0' }}>
         <table className="tbl">
           <thead>
             <tr>
@@ -343,6 +379,44 @@ const LandlordListings = () => {
           </tbody>
         </table>
       </div>
+
+      {/* Mobile: stacked listing cards */}
+      <div data-listings-mobile style={{ display: 'none', flexDirection: 'column', gap: 12 }}>
+        {listings.map((l, i) => (
+          <button key={i} className="solid-card" style={{ padding: 14, textAlign: 'left', display: 'flex', flexDirection: 'column', gap: 12, cursor: 'pointer', width: '100%' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+              <div style={{ width: 54, height: 54, borderRadius: 10, overflow: 'hidden', flexShrink: 0 }}>
+                <PhImg label="" h={54} hue={l.hue}/>
+              </div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontSize: 15, fontWeight: 600 }}>{l.title}</div>
+                <div style={{ fontSize: 12, color: 'var(--ink-3)' }}>{l.area} · {l.beds} bed · {l.sqft} ft²</div>
+              </div>
+              <div style={{ textAlign: 'right' }}>
+                <div className="display" style={{ fontSize: 18 }}>{l.price}</div>
+                <span className={`chip ${l.status === 'Live' ? 'chip-ok' : ''}`} style={{ height: 22, fontSize: 11, marginTop: 4 }}>
+                  {l.status === 'Live' && <span style={{ width: 5, height: 5, borderRadius: 99, background: 'oklch(0.68 0.14 155)' }}/>}
+                  {l.status}
+                </span>
+              </div>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8, padding: '8px 0 0', borderTop: '1px solid var(--line)' }}>
+              <div>
+                <div style={{ fontSize: 10, color: 'var(--ink-3)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Applicants</div>
+                <div style={{ fontSize: 14, fontWeight: 600, marginTop: 2 }}>{l.apps}</div>
+              </div>
+              <div>
+                <div style={{ fontSize: 10, color: 'var(--ink-3)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Views</div>
+                <div style={{ fontSize: 14, fontWeight: 600, marginTop: 2 }}>{l.views}</div>
+              </div>
+              <div>
+                <div style={{ fontSize: 10, color: 'var(--ink-3)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Conversion</div>
+                <div style={{ fontSize: 14, fontWeight: 600, marginTop: 2 }}>{l.views > 0 ? `${Math.round(l.apps/l.views*100)}%` : '—'}</div>
+              </div>
+            </div>
+          </button>
+        ))}
+      </div>
     </div>
   );
 };
@@ -372,12 +446,12 @@ const LandlordApp = () => {
     messages: <LandlordMessagesPlaceholder/>,
   };
   return (
-    <div style={{ display: 'flex', minHeight: '100vh' }}>
+    <div data-app-layout style={{ display: 'flex', minHeight: '100vh' }}>
       <div className="quiet-bg"/>
       <AppSidebar role="landlord"/>
       <main style={{ flex: 1, minWidth: 0 }}>
         <AppTopbar title={titles[sub] || 'Dashboard'}>
-          <button className="btn btn-primary btn-sm">
+          <button className="btn btn-primary btn-sm" data-app-topbar-cta>
             <Icon name="plus" size={14}/> New listing
           </button>
         </AppTopbar>

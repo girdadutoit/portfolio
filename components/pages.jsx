@@ -120,10 +120,10 @@ const ForTenantsPage = () => {
                   <div style={{ fontSize: 10, color: 'var(--ink-3)' }}>CARE SCORE</div>
                 </div>
               </div>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8, marginBottom: 14 }}>
-                <PhImg label="2019" h={80} hue={30} />
-                <PhImg label="2021" h={80} hue={50} />
-                <PhImg label="2024" h={80} hue={20} />
+              <div data-profile-gallery style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gridTemplateRows: 'repeat(2, 1fr)', gap: 8, marginBottom: 14, height: 180 }}>
+                <PhImg label="2024 · Hackney" h="100%" hue={20} style={{ gridRow: 'span 2' }}/>
+                <PhImg label="2021 · Leeds" h="100%" hue={50}/>
+                <PhImg label="2019 · Shoreditch" h="100%" hue={30}/>
               </div>
               <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 14 }}>
                 <span className="chip chip-verified"><Icon name="check" size={12} /> 3 verified refs</span>
@@ -376,7 +376,7 @@ const PricingPage = () => {
       
 
       {/* toggle */}
-      <div style={{ display: 'flex', justifyContent: 'center', padding: '20px 0 40px' }}>
+      <div className="container" style={{ display: 'flex', justifyContent: 'center', padding: '20px 28px 40px' }}>
         <div className="seg">
           <button className={!yearly ? 'on' : ''} onClick={() => setYearly(false)}>Monthly</button>
           <button className={yearly ? 'on' : ''} onClick={() => setYearly(true)}>Yearly · save 20%</button>

@@ -46,13 +46,12 @@ const MarketingNav = () => {
         </nav>
         <div data-nav-actions style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
           <button data-nav-signin className="btn btn-ghost btn-sm" onClick={() => go('/signin')}>Sign in</button>
-          <button className="btn btn-primary btn-sm" onClick={() => go('/signup')}>
+          <button data-nav-cta className="btn btn-primary btn-sm" onClick={() => go('/signup')}>
             Get started <Icon name="arrowRight" size={14} />
           </button>
           <button data-nav-burger aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen}
           onClick={() => setMenuOpen((v) => !v)}
           style={{
-            display: 'none',
             width: 44, height: 44, borderRadius: 12,
             background: 'color-mix(in oklab, white 55%, transparent)',
             border: '1px solid var(--glass-border)',
@@ -83,6 +82,7 @@ const MarketingNav = () => {
           )}
             <div className="hr" style={{ margin: '12px 4px' }} />
             <button className="btn btn-ghost btn-lg btn-block" onClick={() => {go('/signin');setMenuOpen(false);}}>Sign in</button>
+            <button className="btn btn-primary btn-lg btn-block" style={{ marginTop: 8 }} onClick={() => {go('/signup');setMenuOpen(false);}}>Get started <Icon name="arrowRight" size={14} /></button>
           </nav>
         </div>
       }
@@ -201,14 +201,14 @@ const HeroComposition = ({ role }) => {
       gridColumn: '2', gridRow: '1',
       alignSelf: 'start',
       display: 'flex', flexDirection: 'column', gap: 10,
-      animationDelay: '.1s', height: "290px"
+      animationDelay: '.1s'
     }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div data-match-card style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12 }}>
           <div style={{ fontSize: 13, color: 'var(--ink-2)', fontWeight: 500 }}>Match with<br />12 Harlow Mews</div>
           <Icon name="arrowUpRight" size={16} style={{ color: 'var(--ink-3)' }} />
         </div>
-        <div style={{ display: 'flex', justifyContent: 'center', padding: '8px 0', width: "252px", height: "6px" }}>
-          <Ring value={94} size={200} label="compatibility" color="coral" />
+        <div data-match-ring style={{ display: 'flex', justifyContent: 'center', padding: '8px 0' }}>
+          <Ring value={94} size={200} label="Match" color="coral" />
         </div>
       </div>
 
@@ -308,16 +308,29 @@ const HeroComposition = ({ role }) => {
 };
 
 // ===== Social proof row =====
+const LOGOS = ['Savills', 'Foxtons', 'Knight Frank', 'Dexters', 'Purplebricks', 'OpenRent'];
+
 const LogoRow = () =>
 <div style={{ padding: '40px 0 60px' }}>
     <div className="container" style={{ textAlign: 'center' }}>
       <div style={{ fontSize: 12, color: 'var(--ink-3)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 22 }}>
         Trusted by landlords & tenants across the UK
       </div>
-      <div style={{ display: 'flex', justifyContent: 'center', gap: 48, flexWrap: 'wrap', opacity: 0.6 }}>
-        {['Savills', 'Foxtons', 'Knight Frank', 'Dexters', 'Purplebricks', 'OpenRent'].map((n) =>
+      {/* Desktop: centered static row */}
+      <div data-logos-desktop style={{ display: 'flex', justifyContent: 'center', gap: 48, flexWrap: 'wrap', opacity: 0.6 }}>
+        {LOGOS.map((n) =>
       <div key={n} className="display" style={{ fontSize: 22, color: 'var(--ink-3)' }}>{n}</div>
       )}
+      </div>
+      {/* Mobile: infinite marquee */}
+      <div data-logos-mobile style={{ display: 'none', overflow: 'hidden', position: 'relative',
+        WebkitMaskImage: 'linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent)',
+        maskImage: 'linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent)' }}>
+        <div className="marquee" style={{ opacity: 0.6 }}>
+          {[...LOGOS, ...LOGOS].map((n, i) =>
+          <div key={i} className="display" style={{ fontSize: 22, color: 'var(--ink-3)', flexShrink: 0 }}>{n}</div>
+          )}
+        </div>
       </div>
     </div>
   </div>;
@@ -384,7 +397,7 @@ const FeatureBento = () => {
           </h2>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gridAutoRows: '220px', gap: 20 }}>
+        <div data-bento style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gridAutoRows: '220px', gap: 20 }}>
           {/* Big: Home Story */}
           <div className="solid-card" style={{ gridColumn: 'span 3', gridRow: 'span 2', padding: 28, display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden' }}>
             <div style={{ zIndex: 1 }}>
@@ -634,7 +647,7 @@ const Footer = () => {
   const { go } = useNav();
   return (
     <footer style={{ padding: '60px 0 40px', borderTop: '1px solid var(--line)', background: 'color-mix(in oklab, white 60%, transparent)' }}>
-      <div className="container-wide" style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr 1fr 1fr 1fr', gap: 40 }}>
+      <div data-footer-grid className="container-wide" style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr 1fr 1fr 1fr', gap: 40 }}>
         <div>
           <Logo onClick={() => go('/')} />
           <div style={{ marginTop: 16, fontSize: 14, color: 'var(--ink-3)', maxWidth: 280 }}>

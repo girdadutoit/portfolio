@@ -100,9 +100,9 @@ const Ring = ({ value = 72, size = 120, label, color = 'coral', thickness = 12 }
         style={{ transition: 'stroke-dasharray .6s ease' }} />
       </svg>
       <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column',
-        alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: thickness + 4, gap: 6 }}>
-        <div className="display" style={{ fontSize: size * 0.36, lineHeight: 0.95 }}>{value}</div>
-        {label && <div style={{ fontSize: Math.max(10, Math.min(13, size * 0.10)), color: 'var(--ink-3)', letterSpacing: '0.06em', textTransform: 'uppercase', lineHeight: 1.1, maxWidth: '90%', fontWeight: 500 }}>{label}</div>}
+        alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: thickness + 8, gap: 4 }}>
+        <div className="display" style={{ fontSize: size * 0.26, lineHeight: 0.95 }}>{value}</div>
+        {label && <div style={{ fontSize: Math.max(8, Math.min(10, size * 0.075)), color: 'var(--ink-3)', letterSpacing: '0.08em', textTransform: 'uppercase', lineHeight: 1.1, maxWidth: '95%', fontWeight: 500 }}>{label}</div>}
       </div>
     </div>);
 

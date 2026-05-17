@@ -7,9 +7,9 @@ const AuthLayout = ({ mode, children }) => {
   const isSignin = mode === 'signin';
 
   return (
-    <div style={{ minHeight: '100vh', display: 'grid', gridTemplateColumns: '1fr 1.05fr' }}>
+    <div data-auth-layout style={{ minHeight: '100vh', display: 'grid', gridTemplateColumns: '1fr 1.05fr' }}>
       {/* LEFT — form */}
-      <div style={{ display: 'flex', flexDirection: 'column', padding: '32px 48px', background: 'var(--cream)', position: 'relative' }}>
+      <div data-auth-form style={{ display: 'flex', flexDirection: 'column', padding: '32px 48px', background: 'var(--cream)', position: 'relative' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Logo onClick={() => go('/')}/>
           <div style={{ fontSize: 13, color: 'var(--ink-3)' }}>
@@ -36,7 +36,7 @@ const AuthLayout = ({ mode, children }) => {
       </div>
 
       {/* RIGHT — marketing panel */}
-      <div style={{
+      <div data-auth-side style={{
         position: 'relative', overflow: 'hidden',
         background: 'linear-gradient(135deg, oklch(0.94 0.06 30), oklch(0.92 0.08 50) 60%, oklch(0.88 0.10 20))',
         display: 'flex', flexDirection: 'column',
