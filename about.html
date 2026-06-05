@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — Girda du Toit</title>
+    <meta name="description" content="About Girda du Toit — Senior Lead Designer based in London.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23111'/><text x='6' y='23' font-size='18' font-weight='900' fill='white' font-family='sans-serif'>G</text></svg>">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        :root { --black: #111111; --white: #ffffff; --grey: #888888; --light: #f5f5f5; --border: #e8e8e8; }
+        body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--black); min-height: 100vh; -webkit-font-smoothing: antialiased; }
+
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 20px 40px;
+            background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+        }
+        .nav-name { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--black); text-decoration: none; }
+        .nav-links { display: flex; align-items: center; gap: 32px; }
+        .nav-links a { font-size: 11px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--black); text-decoration: none; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--grey); }
+        .nav-links a.active { border-bottom: 1px solid var(--black); }
+
+        .page { padding: 140px 40px 120px; max-width: 1200px; }
+
+        .page-title {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: clamp(3rem, 8vw, 7rem);
+            line-height: 0.92;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+            color: var(--black);
+            margin-bottom: 80px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            border-top: 1px solid var(--border);
+            padding-top: 48px;
+            margin-bottom: 80px;
+        }
+
+        .about-label {
+            font-size: 11px; font-weight: 400; letter-spacing: 0.1em;
+            text-transform: uppercase; color: var(--grey); margin-bottom: 20px;
+        }
+        .about-text {
+            font-size: 15px; font-weight: 300; line-height: 1.75;
+            color: var(--black);
+        }
+        .about-text + .about-text { margin-top: 16px; }
+
+        /* Timeline */
+        .timeline { border-top: 1px solid var(--border); padding-top: 48px; margin-bottom: 80px; }
+        .timeline-label { font-size: 11px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey); margin-bottom: 0; }
+        .timeline-row {
+            display: grid;
+            grid-template-columns: 120px 1fr 140px;
+            align-items: baseline;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border);
+            gap: 40px;
+        }
+        .tl-dates { font-size: 11px; color: var(--grey); letter-spacing: 0.06em; }
+        .tl-role { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; }
+        .tl-company { font-size: 12px; color: var(--grey); letter-spacing: 0.06em; text-align: right; }
+
+        /* Expertise */
+        .expertise { border-top: 1px solid var(--border); padding-top: 48px; margin-bottom: 80px; }
+        .expertise-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; margin-top: 40px; }
+        .exp-title { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 10px; }
+        .exp-text { font-size: 13px; font-weight: 300; line-height: 1.65; color: var(--grey); }
+
+        /* Tools */
+        .tools { border-top: 1px solid var(--border); padding-top: 48px; margin-bottom: 80px; }
+        .tools-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+        .tool-tag {
+            font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+            border: 1px solid var(--border); padding: 8px 16px;
+            color: var(--black); transition: all 0.2s;
+        }
+        .tool-tag:hover { background: var(--black); color: var(--white); }
+
+        /* CTA */
+        .cta { border-top: 1px solid var(--border); padding-top: 48px; }
+        .cta-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2rem, 5vw, 4.5rem); line-height: 0.95; letter-spacing: -0.02em; text-transform: uppercase; margin-bottom: 32px; }
+        .cta-links { display: flex; gap: 16px; flex-wrap: wrap; }
+        .cta-link {
+            font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+            text-decoration: none; color: var(--white); background: var(--black);
+            padding: 14px 28px; transition: opacity 0.2s;
+        }
+        .cta-link:hover { opacity: 0.7; }
+        .cta-link.outline { background: var(--white); color: var(--black); border: 1px solid var(--black); }
+        .cta-link.outline:hover { background: var(--black); color: var(--white); }
+
+        footer {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 20px 40px; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 12px;
+        }
+        footer span { font-size: 11px; color: var(--grey); letter-spacing: 0.06em; }
+        .footer-links { display: flex; gap: 24px; }
+        .footer-links a { font-size: 11px; color: var(--grey); text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--black); }
+
+        @media (max-width: 768px) {
+            nav { padding: 16px 20px; }
+            .page { padding: 120px 20px 80px; }
+            .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .timeline-row { grid-template-columns: 80px 1fr; gap: 20px; }
+            .tl-company { display: none; }
+            .expertise-grid { grid-template-columns: 1fr; gap: 32px; }
+            footer { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="nav-name">Girda du Toit</a>
+    <div class="nav-links">
+        <a href="about.html" class="active">About</a>
+        <a href="mailto:girdadutoit@gmail.com">Contact</a>
+    </div>
+</nav>
+
+<div class="page">
+
+    <h1 class="page-title">About<br>Me</h1>
+
+    <!-- Bio -->
+    <div class="about-grid">
+        <div>
+            <p class="about-label">[ Profile ]</p>
+            <p class="about-text">I'm a Senior Lead Designer at FINN Partners with 7+ years of experience, based in London. I work across healthcare, consulting, BioPharma, and campaign sectors, and I'm working towards a UX Design Director role.</p>
+            <p class="about-text" style="margin-top:16px">I care about understanding problems properly before designing solutions. Every project starts with research, stakeholder input, and a clear brief — then moves into considered, intentional design work. AI helps me move faster through the structural phases so more energy goes where it counts.</p>
+        </div>
+        <div>
+            <p class="about-label">[ Currently ]</p>
+            <p class="about-text" style="margin-bottom:32px">Senior Lead Designer at FINN Partners, London.<br>Open to new opportunities — remote & hybrid.</p>
+            <p class="about-label">[ Education ]</p>
+            <p class="about-text">BA Interaction Design<br>Cape Town Creative Academy, 2015–2017</p>
+        </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="timeline">
+        <p class="timeline-label">[ Experience ]</p>
+        <div class="timeline-row">
+            <span class="tl-dates">2022 — Now</span>
+            <span class="tl-role">Senior UX Designer</span>
+            <span class="tl-company">FINN Partners, London</span>
+        </div>
+        <div class="timeline-row">
+            <span class="tl-dates">2019 — 2022</span>
+            <span class="tl-role">UX Designer</span>
+            <span class="tl-company">FINN Partners, London</span>
+        </div>
+        <div class="timeline-row">
+            <span class="tl-dates">2017 — 2019</span>
+            <span class="tl-role">Digital Designer</span>
+            <span class="tl-company">Independent, Cape Town</span>
+        </div>
+        <div class="timeline-row">
+            <span class="tl-dates">2015 — 2017</span>
+            <span class="tl-role">Design Intern</span>
+            <span class="tl-company">Various, South Africa</span>
+        </div>
+    </div>
+
+    <!-- What I bring -->
+    <div class="expertise">
+        <p class="about-label">[ What I bring to the table ]</p>
+        <div class="expertise-grid">
+            <div>
+                <p class="exp-title">UX Strategy & Leadership</p>
+                <p class="exp-text">I'm comfortable in client rooms, workshops, and strategy sessions. I can take a vague brief and turn it into a clear direction — and I know how to bring people along with me.</p>
+            </div>
+            <div>
+                <p class="exp-title">AI Integration & Optimisation</p>
+                <p class="exp-text">I've built a real working knowledge of AI tools — Claude, Relume, Notebook LM, Figma Make — and how to use them together to move faster without cutting corners on quality.</p>
+            </div>
+            <div>
+                <p class="exp-title">Systems & Execution</p>
+                <p class="exp-text">I care about the handoff as much as the design. Solid Figma systems, clean documentation, and a developer-ready spec mean the work I design actually gets built the way I intended it.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tools -->
+    <div class="tools">
+        <p class="about-label">[ Tools ]</p>
+        <div class="tools-list">
+            <span class="tool-tag">Figma</span>
+            <span class="tool-tag">FigJam</span>
+            <span class="tool-tag">Relume</span>
+            <span class="tool-tag">Claude AI</span>
+            <span class="tool-tag">Notebook LM</span>
+            <span class="tool-tag">Figma Make</span>
+            <span class="tool-tag">Design.md</span>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta">
+        <h2 class="cta-title">Want to<br>work together?</h2>
+        <div class="cta-links">
+            <a href="mailto:girdadutoit@gmail.com" class="cta-link">Send an Email</a>
+            <a href="https://www.linkedin.com/in/girdadutoit" target="_blank" class="cta-link outline">LinkedIn</a>
+            <a href="index.html" class="cta-link outline">View Work</a>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <span>Girda du Toit '25</span>
+    <div class="footer-links">
+        <a href="mailto:girdadutoit@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/girdadutoit" target="_blank">LinkedIn</a>
+        <a href="index.html">Work</a>
+    </div>
+</footer>
+
+</body>
+</html>
