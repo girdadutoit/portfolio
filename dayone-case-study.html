@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAY ONE Early Learning — Girda du Toit</title>
+    <meta name="description" content="DAY ONE Early Learning — full website redesign for a non-profit early childhood education organisation.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23111'/><text x='6' y='23' font-size='18' font-weight='900' fill='white' font-family='sans-serif'>G</text></svg>">
+    <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    :root { --black: #111111; --white: #ffffff; --grey: #888888; --light: #f5f5f5; --border: #e8e8e8; }
+    body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--black); min-height: 100vh; -webkit-font-smoothing: antialiased; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); }
+    .nav-name { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--black); text-decoration: none; }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a { font-size: 11px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--black); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--grey); }
+
+    .page { padding: 140px 40px 120px; max-width: 1200px; }
+
+    .page-eyebrow { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
+    .eyebrow-tag { font-size: 11px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey); }
+    .eyebrow-dot { color: var(--border); }
+
+    .page-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(3rem, 9vw, 8rem); line-height: 0.92; letter-spacing: -0.02em; text-transform: uppercase; color: var(--black); margin-bottom: 32px; }
+
+    .page-sub { font-family: 'Syne', sans-serif; font-size: clamp(1rem, 2vw, 1.5rem); font-weight: 700; color: var(--grey); margin-bottom: 28px; }
+
+    .page-intro { font-size: 15px; font-weight: 300; line-height: 1.75; color: var(--grey); max-width: 640px; margin-bottom: 48px; }
+
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; padding-bottom: 60px; border-bottom: 1px solid var(--border); }
+    .btn { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; padding: 13px 24px; transition: opacity 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-solid { background: var(--black); color: var(--white); }
+    .btn-solid:hover { opacity: 0.7; }
+    .btn-outline { background: var(--white); color: var(--black); border: 1px solid var(--black); }
+    .btn-outline:hover { background: var(--black); color: var(--white); }
+
+    /* Stats */
+    .stats-row { display: grid; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 0; }
+    .stat-item { padding: 32px 0; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 6px; }
+    .stat-item + .stat-item { border-left: none; }
+    .stat-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 2.5rem; line-height: 1; }
+    .stat-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--grey); }
+
+    /* Sections */
+    section { padding: 60px 0; border-top: 1px solid var(--border); }
+    .section-label { font-size: 11px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey); margin-bottom: 24px; }
+    .section-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.5rem, 3.5vw, 2.8rem); letter-spacing: -0.01em; line-height: 1.1; margin-bottom: 24px; }
+    .body-text { font-size: 15px; font-weight: 300; line-height: 1.75; color: var(--grey); }
+    .body-text + .body-text { margin-top: 16px; }
+
+    /* Process steps */
+    .process-list { margin-top: 16px; }
+    .process-row { display: grid; grid-template-columns: 160px 1fr; gap: 40px; padding: 28px 0; border-bottom: 1px solid var(--border); align-items: baseline; }
+    .process-row:first-child { border-top: 1px solid var(--border); }
+    .process-step-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--grey); }
+    .process-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; margin-bottom: 8px; }
+    .process-desc { font-size: 14px; font-weight: 300; line-height: 1.65; color: var(--grey); }
+
+    /* Working files gallery */
+    .gallery { columns: 2; gap: 20px; margin-top: 32px; }
+    .gallery-item { break-inside: avoid; margin-bottom: 20px; }
+    .gallery-item img { width: 100%; display: block; border: 1px solid var(--border); }
+    .gallery-caption { display: flex; align-items: baseline; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .gallery-cap-title { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; }
+    .gallery-cap-tag { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--grey); }
+
+    /* Two col overview */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 32px; }
+    .two-col-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 12px; }
+
+    /* Outcome block */
+    .outcome-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 32px; }
+    .outcome-cell { padding: 28px 32px 28px 0; border-right: 1px solid var(--border); }
+    .outcome-cell:nth-child(even) { padding-left: 32px; padding-right: 0; border-right: none; }
+    .outcome-cell-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 2rem; margin-bottom: 4px; }
+    .outcome-cell-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--grey); }
+
+    footer { display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 12px; }
+    footer span { font-size: 11px; color: var(--grey); letter-spacing: 0.06em; }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 11px; color: var(--grey); text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--black); }
+
+    @media (max-width: 768px) {
+        nav { padding: 16px 20px; }
+        .page { padding: 120px 20px 80px; }
+        .stats-row { grid-template-columns: 1fr 1fr; }
+        .process-row { grid-template-columns: 1fr; gap: 8px; }
+        .two-col, .outcome-grid { grid-template-columns: 1fr; gap: 32px; }
+        .gallery { columns: 1; }
+        footer { padding: 20px; }
+        .outcome-cell { border-right: none; padding: 20px 0; border-bottom: 1px solid var(--border); }
+        .outcome-cell:nth-child(even) { padding-left: 0; border-bottom: 1px solid var(--border); }
+    }
+</style>
+</head>
+<body><nav>
+    <a href="index.html" class="nav-name">Girda du Toit</a>
+    <div class="nav-links">
+        <a href="index.html">Work</a>
+        <a href="about.html">About</a>
+        <a href="mailto:girdadutoit@gmail.com">Contact</a>
+    </div>
+</nav>
+<div class="page">
+    <div class="page-eyebrow">
+        <span class="eyebrow-tag">Case Study</span><span class="eyebrow-dot">—</span>
+        <span class="eyebrow-tag">Non-profit</span><span class="eyebrow-dot">—</span>
+        <span class="eyebrow-tag">2025</span>
+    </div>
+    <h1 class="page-title">DAY ONE<br>Early Learning</h1>
+    <p class="page-sub">A joyful start, redesigned.</p>
+    <p class="page-intro">A full website redesign for DAY ONE Early Learning, a non-profit championing early childhood education through its Teacher Apprenticeship Pathway. I redesigned the site end-to-end — homepage through Families, Future Educators, Partnerships, About, Bio, and the DAY ONE Model — from early wireframes to a full modular Figma component system.</p>
+    <div class="hero-actions">
+        <a href="index.html" class="btn btn-outline">← Back to Work</a>
+    </div>
+
+    <div class="stats-row" style="grid-template-columns: repeat(4,1fr)">
+        <div class="stat-item"><span class="stat-num">7</span><span class="stat-label">Pages redesigned</span></div>
+        <div class="stat-item"><span class="stat-num">3</span><span class="stat-label">Audience pathways mapped</span></div>
+        <div class="stat-item"><span class="stat-num">Full</span><span class="stat-label">Figma component system</span></div>
+        <div class="stat-item"><span class="stat-num">Approved</span><span class="stat-label">Client sign-off</span></div>
+    </div>
+
+    <section>
+        <p class="section-label">[ Overview ]</p>
+        <h2 class="section-title">A joyful brand that needed a site as warm as its mission.</h2>
+        <p class="body-text">DAY ONE's site had to speak to three very different audiences in one place — families looking for care they can trust, future educators considering the Teacher Apprenticeship Pathway, and partners weighing up a community investment. Each needed their own clear route in, without the site feeling fragmented.</p>
+        <p class="body-text">It also had to carry some genuinely persuasive numbers — 90% of brain development happening before age five, a $122B economic case, 150K children reached — without turning into a wall of statistics. The brand's palette and playful visual identity needed to do a lot of that heavy lifting.</p>
+        <div class="two-col" style="margin-top:32px">
+            <div><p class="two-col-title">Sector</p><p class="body-text">Non-profit / Early Learning</p></div>
+            <div><p class="two-col-title">Tools</p><p class="body-text">Figma, FigJam</p></div>
+            <div style="margin-top:24px"><p class="two-col-title">Deliverable</p><p class="body-text">Full site redesign + component library</p></div>
+            <div style="margin-top:24px"><p class="two-col-title">Status</p><p class="body-text">Design approved, in handoff</p></div>
+        </div>
+    </section>
+
+    <section>
+        <p class="section-label">[ Process ]</p>
+        <h2 class="section-title">From lo-fi structure to a full component system.</h2>
+        <div class="process-list">
+            <div class="process-row"><span class="process-step-label">Step 1</span><div><p class="process-title">Mapping Three Audiences</p><p class="process-desc">I ran discovery sessions to understand how families, future educators, and community partners each needed a different entry point, message, and call to action — and how the homepage could route each of them cleanly.</p></div></div>
+            <div class="process-row"><span class="process-step-label">Step 2</span><div><p class="process-title">Structural Wireframes</p><p class="process-desc">Lo-fi wireframes across the homepage and every core section — Families, Future Educators, and Partnerships — to lock the content order and page structure before any visual design started.</p></div></div>
+            <div class="process-row"><span class="process-step-label">Step 3</span><div><p class="process-title">Colour & Content Exploration</p><p class="process-desc">I tested how the brand's yellow, blue, and purple palette could carry visual hierarchy — making the headline stats (90%, $122B, 150K) land as moments, not just numbers buried in copy.</p></div></div>
+            <div class="process-row"><span class="process-step-label">Step 4</span><div><p class="process-title">Full Screens, Every Page</p><p class="process-desc">Refined, final screens across the Homepage, Future Educators, About, and Bio pages — balancing the brand's warmth with the clarity a mission-driven audience needs.</p></div></div>
+            <div class="process-row"><span class="process-step-label">Step 5</span><div><p class="process-title">Modular Component System</p><p class="process-desc">Navigation variants, hero and page-header modules, content modules, and input modules — all built as reusable Figma components so DAY ONE's team can extend the site without starting from scratch.</p></div></div>
+        </div>
+    </section>
+
+    <section>
+        <p class="section-label">[ Working Files ]</p>
+        <h2 class="section-title">Inside the project.</h2>
+        <div class="gallery">
+            <div class="gallery-item"><img src="dayone-wireframes.png" alt="DAY ONE structural wireframes"><div class="gallery-caption"><span class="gallery-cap-title">Structural Wireframes</span><span class="gallery-cap-tag">Phase 2</span></div></div>
+            <div class="gallery-item"><img src="dayone-desktop.png" alt="DAY ONE final desktop screens"><div class="gallery-caption"><span class="gallery-cap-title">Final Screens — Desktop</span><span class="gallery-cap-tag">Ready for Dev</span></div></div>
+            <div class="gallery-item"><img src="dayone-mobile.png" alt="DAY ONE final mobile screens"><div class="gallery-caption"><span class="gallery-cap-title">Final Screens — Mobile</span><span class="gallery-cap-tag">Responsive</span></div></div>
+            <div class="gallery-item"><img src="dayone-blocks.png" alt="DAY ONE Figma component system"><div class="gallery-caption"><span class="gallery-cap-title">Component System</span><span class="gallery-cap-tag">Figma</span></div></div>
+        </div>
+    </section>
+
+    <section>
+        <p class="section-label">[ Outcome ]</p>
+        <h2 class="section-title">A seamless process, start to finish.</h2>
+        <p class="body-text">The DAY ONE team was thrilled with the redesign. From the first structural wireframe through to final component handoff, the process ran smoothly, and the result reflects the warmth and clarity their mission needed. Work file is confidential but I'm always happy to walk through it.</p>
+    </section>
+</div>
+<footer>
+    <span>Girda du Toit '25</span>
+    <div class="footer-links">
+        <a href="index.html">Work</a>
+        <a href="about.html">About</a>
+        <a href="mailto:girdadutoit@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/girdadutoit" target="_blank">LinkedIn</a>
+    </div>
+</footer></body></html>
